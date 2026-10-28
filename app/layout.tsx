@@ -20,7 +20,7 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: "Lance — Developer Portfolio",
-  description: "Portfolio of Lance, a computer science student break it, fix it, ship it.",
+  description: "Portfolio of Lance, a computer science student who builds desktop tools, web apps and game mods. Break it, fix it, ship it.",
   keywords: ["developer", "portfolio", "web development", "react", "typescript"],
 };
 

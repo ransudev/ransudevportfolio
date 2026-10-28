@@ -14,10 +14,13 @@ Neo-brutalist brand portfolio: blunt, mechanical, warm, and deliberately physica
 
 ## Macrostructure family
 
-- Identity page: oversized typographic poster with a boxed practice manifest and no imagery.
-- Work page: Portfolio Grid with uniform project records and typographic media fields.
-- Profile pages: Long Document variants for About and Skills.
-- Contact page: Split Studio with the form and direct channels held in equal tension.
+Single page, in this order: Hero → Projects → Skills → About → Contact. Proof comes first.
+
+- Hero: oversized typographic poster ("Break it. Fix it. Ship it.") beside a draggable ID badge on a lanyard. Primary CTA "See the work" → Projects; secondary "Get in touch" → Contact.
+- Projects: Portfolio Grid. The lead project spans the full width; the rest sit two-up. Each card shows a framed screenshot (or a colored typographic poster until one exists) and is one big link.
+- Skills and About: Long Document variants.
+- Contact: the finale. A blunt headline, the email in display type with send/copy actions, and labeled GitHub and Discord rows.
+- Section titles are compact tilted tabs, each in its own color and angle, not full-width banners. The hero holds the page's only `<h1>`; section titles are `<h2>`.
 
 ## Theme
 
@@ -33,7 +36,7 @@ The four brand colors were supplied by the user. The system uses them as a full-
 
 ## Typography
 
-- Display: Geist, weight 800–900, roman.
+- Display: Outfit, weight 900, roman, uppercase for titles.
 - Body: Geist, weight 400.
 - Outlier: Geist Mono for metadata and the wordmark only.
 - Display tracking: `-0.04em`.
@@ -45,9 +48,11 @@ Four-point named scale in `tokens.css`. Pages use named tokens rather than raw c
 
 ## Motion
 
-- No ambient loops, bounce, parallax, or decorative animation.
+- One signature motion: the hero's lanyard badge. It drops in, swings on a spring, and can be dragged. The swing is capped at 90° either side and the card's tilt at 20°, so it never spins.
+- Ambient background: the faint hero shapes drift and bounce off the hero's edges, and shift slightly with the mouse. They stay low-opacity so the headline and lanyard lead.
+- The marquee strip under the hero loops slowly (60s).
 - Interactive feedback uses transform and opacity only.
-- Reduced-motion fallback is opacity-only and at most 150ms.
+- Reduced motion: the lanyard hangs still, the marquee stops, and reveals are near-instant.
 
 ## Microinteractions stance
 
@@ -72,7 +77,7 @@ Four-point named scale in `tokens.css`. Pages use named tokens rather than raw c
 
 - Macrostructure and content density.
 - Project-card composition.
-- Imagery is deferred until the user supplies or approves assets.
+- Imagery: real project screenshots live in `public/projects/`. Projects without one use a typographic poster in their assigned color until the user supplies a screenshot.
 
 ## Exports
 

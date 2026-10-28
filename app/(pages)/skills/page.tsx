@@ -6,15 +6,14 @@ export default function SkillsPage() {
   return (
     <section id="skills" className="page skills-page scroll-section" aria-labelledby="skills-title">
       <header className="page-intro" data-reveal="heading">
-        <h1 id="skills-title" className="page-title">Skills</h1>
-        <p className="page-lede">A compact inventory of the tools I use to move from an idea to a working application.</p>
+        <h2 id="skills-title" className="page-title">Skills</h2>
       </header>
 
       <div className="skills-index">
         {skillCategories.map((category, index) => (
           <section key={category.category} className="skill-group" aria-labelledby={`skill-${index}`} data-reveal="item" style={{ "--reveal-index": index } as CSSProperties}>
             <div className="skill-group__head">
-              <h2 id={`skill-${index}`}>{category.category}</h2>
+              <h3 id={`skill-${index}`}>{category.category}</h3>
             </div>
             <ul className="skill-group__list">
               {category.skills.map((skill) => <li key={skill.name}>{skill.name}</li>)}

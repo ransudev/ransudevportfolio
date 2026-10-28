@@ -13,9 +13,9 @@ export default function RootPage() {
       <Navbar />
       <main id="main-content" className="site-main">
         <HomePage />
-        <AboutPage />
-        <SkillsPage />
         <ProjectsPage />
+        <SkillsPage />
+        <AboutPage />
         <ContactPage />
       </main>
       <MotionObserver />

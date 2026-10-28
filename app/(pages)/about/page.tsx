@@ -1,20 +1,21 @@
 import type { CSSProperties } from "react";
 import { ArrowRight } from "lucide-react";
-import { aboutText, infoCards } from "../../data/about";
+import { aboutParagraphs, infoCards } from "../../data/about";
 
 export default function AboutPage() {
   return (
-    <article id="about" className="page document-page scroll-section">
+    <article id="about" className="page document-page scroll-section" aria-labelledby="about-title">
       <header className="page-intro" data-reveal="heading">
-        <h1 className="page-title">About</h1>
-        <p className="page-lede">A computer science student turning ideas into practical software.</p>
+        <h2 id="about-title" className="page-title">About</h2>
       </header>
 
       <div className="document-page__body">
-        <p className="document-page__lead" data-reveal="copy">{aboutText.replace(/\s+/g, " ").trim()}</p>
+        <div className="document-page__lead" data-reveal="copy">
+          {aboutParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        </div>
 
-        <section className="document-section" aria-labelledby="working-notes-title">
-          <h2 id="working-notes-title" className="document-section__title" data-reveal="title">Working notes</h2>
+        <section className="document-section" aria-labelledby="at-a-glance-title">
+          <h3 id="at-a-glance-title" className="document-section__title" data-reveal="title">At a glance</h3>
           <div className="fact-list">
             {infoCards.map((card, index) => (
               <div key={card.title} className="fact-list__row" data-reveal="item" style={{ "--reveal-index": index } as CSSProperties}>
@@ -26,7 +27,7 @@ export default function AboutPage() {
         </section>
 
         <p className="document-page__close" data-reveal="copy">
-          The work is still growing. The standard stays the same: understand the problem, build the smallest useful answer, and improve it with evidence. {" "}
+          Got a problem that needs taking apart? {" "}
           <a href="#contact" className="text-link">Start a conversation <ArrowRight size={18} aria-hidden="true" /></a>
         </p>
       </div>

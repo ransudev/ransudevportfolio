@@ -23,10 +23,10 @@ AI-accelerated engineer. Lance uses AI as a force multiplier, not a crutch — p
 ## Conversion & proof
 
 - Primary CTA: See the work — project cards with live demos and GitHub links.
-- Secondary CTA: Contact — email, GitHub, Discord, and a direct form.
+- Secondary CTA: Contact — email (send or copy), GitHub, and Discord. No form yet; the site has no backend.
 - The line a visitor remembers after 10 seconds: "Break it. Fix it. Ship it."
 - Belief ladder: (1) Lance knows his stack — proved by the skills inventory and project breadth. (2) He builds things that work — proved by live demos, GitHub repos, and real project descriptions. (3) He's worth contacting — proved by accessible channels and a frictionless form.
-- Proof on hand: 3 GitHub repos (Repeatable, StewardshipHub, JellyAddons), 1 live deployment (StewardshipHub), and a Vercel-hosted portfolio itself.
+- Proof on hand: 5 projects. ShardFlipper (live, private repo), StewardshipHub (live + GitHub), and Repeatable, DeskPeek, and JellyPiP (GitHub), plus the Vercel-hosted portfolio itself.
 
 ## Brand Personality
 

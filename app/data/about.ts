@@ -7,29 +7,30 @@ export interface InfoCard {
   icon: LucideIcon;
 }
 
-export const aboutText = `I'm a passionate student who turns ideas into reality through code. 
-I specialize in building clean, efficient, and user-friendly applications. 
-My approach combines technical skills with creativity, leveraging AI tools to enhance productivity and deliver exceptional results.`;
+export const aboutParagraphs = [
+  "I'm Lance, a computer science student in the Philippines. I build tools that fix annoying problems: take the problem apart, then ship something that works.",
+  "I use AI the way I use a debugger: to move faster, not to think for me. I still read the code, and I own what ships.",
+];
 
 export const infoCards: InfoCard[] = [
   {
-    title: "Education",
-    value: "Computer Science Student", // Update with your actual education
+    title: "Studying",
+    value: "Computer Science",
     icon: GraduationCap,
   },
   {
-    title: "Location",
-    value: "Philippines", // Update with your location
+    title: "Based in",
+    value: "Philippines",
     icon: MapPin,
   },
   {
-    title: "Focus",
-    value: "Systems & Tooling Development",
+    title: "Builds",
+    value: "Desktop tools, web apps, game mods",
     icon: Code,
   },
   {
-    title: "Specialty",
-    value: "AI-Assisted Development",
+    title: "Works with",
+    value: "AI as a force multiplier",
     icon: Sparkles,
   },
 ];

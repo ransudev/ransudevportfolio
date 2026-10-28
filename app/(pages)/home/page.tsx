@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import MarqueeDivider from "../../components/ui/MarqueeDivider";
 import HeroDecor from "../../components/ui/HeroDecor";
+import HeroLanyard from "../../components/ui/HeroLanyard";
 
 export default function HomePage() {
   return (
@@ -15,28 +15,17 @@ export default function HomePage() {
               <span className="neo-hero__mark neo-hero__mark--delay">Fix it.</span>
               <span className="neo-hero__mark neo-hero__mark--delay-2">Ship it.</span>
             </h1>
-            <p>Built with clear thinking and an appetite for difficult problems.</p>
             <div className="neo-hero__actions">
-              <a href="#skills" className="btn btn--outline neo-hero__primary-action">
-                See my skills <ArrowRight size={20} aria-hidden="true" />
+              <a href="#projects" className="btn btn--outline neo-hero__primary-action">
+                See the work <ArrowRight size={20} aria-hidden="true" />
+              </a>
+              <a href="#contact" className="text-link neo-hero__secondary-action">
+                Get in touch
               </a>
             </div>
           </div>
 
-          <aside className="neo-hero__manifest" aria-label="About Lance">
-            <div className="neo-hero__avatar">
-              <Image
-                src="/lance-pixel-avatar.png"
-                alt="Pixel portrait of Lance"
-                width={256}
-                height={256}
-                priority
-              />
-            </div>
-            <a href="#about" className="neo-hero__about-link">
-              About me
-            </a>
-          </aside>
+          <HeroLanyard />
         </div>
       </div>
 
