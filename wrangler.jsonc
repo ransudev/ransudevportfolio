@@ -3,6 +3,10 @@
   // Serve the static export from `out/` (built by `npm run build`). No server code runs.
   "name": "ransudev",
   "compatibility_date": "2026-11-01",
+  "routes": [
+    { "pattern": "ransudev.site", "custom_domain": true },
+    { "pattern": "www.ransudev.site", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./out",
     "not_found_handling": "404-page"
