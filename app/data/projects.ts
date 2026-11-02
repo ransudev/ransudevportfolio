@@ -24,6 +24,15 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    id: 6,
+    title: "Project L",
+    description: "A glitching dragon that lives on your Windows desktop: he roams and perches on windows, dances to your music, and talks back through a fully local AI brain, handling apps, reminders, timers, and notes by voice or text.",
+    techStack: ["Python", "Ollama", "Whisper"],
+    githubUrl: "https://github.com/ransudev/Project-L",
+    logoUrl: "/projects/project-l-logo.png",
+    tone: "pink",
+  },
+  {
     id: 2,
     title: "Repeatable",
     description: "A Windows macro recorder and player built in Rust, letting users record mouse and keyboard actions and replay them with adjustable speed, looping, global hotkeys, and both compact and expanded UI modes.",
