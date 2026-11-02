@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, Play } from "lucide-react";
 import type { CSSProperties } from "react";
 import { projects, type Project } from "../../data/projects";
 
@@ -54,9 +54,24 @@ export default function ProjectsPage() {
             <article key={project.id} className={classes} data-reveal="item" style={{ "--reveal-index": index } as CSSProperties}>
               <div className="project-card__media">
                 {primaryUrl && <span className="project-card__bar">{displayUrl(primaryUrl)}</span>}
-                <div className="project-card__frame">
-                  <ProjectMedia project={project} />
-                </div>
+                {project.videoUrl ? (
+                  <a
+                    href={project.videoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-card__frame project-card__frame--video"
+                    aria-label={`Watch the ${project.title} video`}
+                  >
+                    <ProjectMedia project={project} />
+                    <span className="project-card__play" aria-hidden="true">
+                      <Play size={18} fill="currentColor" /> Watch
+                    </span>
+                  </a>
+                ) : (
+                  <div className="project-card__frame">
+                    <ProjectMedia project={project} />
+                  </div>
+                )}
               </div>
 
               <div className="project-card__content">
@@ -74,6 +89,11 @@ export default function ProjectsPage() {
                   {project.techStack.map((tech) => <li key={tech}>{tech}</li>)}
                 </ul>
                 <div className="project-card__actions">
+                  {project.videoUrl && (
+                    <a href={project.videoUrl} target="_blank" rel="noopener noreferrer" className="text-link">
+                      <Play size={17} aria-hidden="true" /> Watch video
+                    </a>
+                  )}
                   {project.liveUrl && (
                     <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="text-link">
                       <ExternalLink size={17} aria-hidden="true" /> Live site

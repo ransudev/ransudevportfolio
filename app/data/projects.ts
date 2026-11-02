@@ -6,6 +6,8 @@ export interface Project {
   githubUrl?: string;
   liveUrl?: string;
   imageUrl?: string;
+  // Full video with sound, opened from the card's preview.
+  videoUrl?: string;
   // Shown on the typographic poster when there's no screenshot yet.
   logoUrl?: string;
   // Poster colour for projects without a screenshot.
@@ -29,8 +31,8 @@ export const projects: Project[] = [
     description: "A glitching dragon that lives on your Windows desktop: he roams and perches on windows, dances to your music, and talks back through a fully local AI brain, handling apps, reminders, timers, and notes by voice or text.",
     techStack: ["Python", "Ollama", "Whisper"],
     githubUrl: "https://github.com/ransudev/Project-L",
-    logoUrl: "/projects/project-l-logo.png",
-    tone: "pink",
+    imageUrl: "/projects/project-l-preview.gif",
+    videoUrl: "/projects/project-l-showcase.mp4",
   },
   {
     id: 2,
