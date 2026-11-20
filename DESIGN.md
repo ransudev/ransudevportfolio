@@ -16,7 +16,7 @@ A 90s personal homepage, in the Neocities / GeoCities tradition: tiled wallpaper
 
 One page, in this order: Banner → Marquee → (Sidebar | Welcome → Projects → Skills → About → Contact) → Footer.
 
-- **Banner:** the page's only `<h1>` ("Ransu.dev") in Pixelify Sans with stacked hard text shadows, plus the tagline "Break it. Fix it. Ship it." It sits on a pixel night scene: a twinkling, tileable starry sky that glows oxblood towards the horizon, a repeat-x strip of rooftops with lit windows, a full moon in the top-right corner and a black cat on the roof that swishes its tail and blinks (`banner-sky`, `banner-roofs`, `banner-moon`, `roof-cat` in `public/retro/`).
+- **Banner:** the page's only `<h1>` ("Ransu.dev") in Pixelify Sans with stacked hard text shadows, plus the tagline "Break it. Fix it. Ship it." It sits on a pixel night scene: a twinkling, tileable red night sky that glows oxblood towards the horizon, a repeat-x strip of rooftops with lit windows, a full moon in the top-right corner and a black cat on the roof that swishes its tail and blinks (`banner-sky`, `banner-roofs`, `banner-moon`, `roof-cat` in `public/retro/`).
 - **Marquee:** a sunken "screen" strip with site news (`app/data/badges.ts`). Pauses on hover.
 - **Sidebar** (sticky on desktop): the nav window with active-section highlight, `status.txt`, the hit counter, blinkies and the 88x31 button wall. Under 48rem the nav becomes a sticky one-row bar at the top and the extras move below the content.
 - **Welcome** (`welcome.html` window): greeting, CTAs ("See my projects", "Get in touch"), an under-construction sign, and the lanyard ID badge.
@@ -32,7 +32,7 @@ The four brand colours (supplied by Lance) stay the backbone:
 
 Around them:
 
-- **Wallpaper:** a twinkling night sky that continues the banner's night scene: `night-tile.gif`, a 128px tile of near-black `#0E0514` with faint dusk dithering and stars that twinkle over 3 frames. The asset script draws it, and reduced-motion visitors get the still `.png`.
+- **Wallpaper:** a twinkling night sky that continues the banner's night scene: `night-tile.gif`, a 128px tile of dark red night `#240608` with a warmer `#420E10` haze dithered in, and warm white, gold, amber and pink stars that twinkle over 3 frames. The banner's sky uses the same red night at the top, fading into the brand oxblood at the rooftops. The asset script draws it, and reduced-motion visitors get the still `.png`.
 - **Panels:** cream paper (`--color-paper`) with two-tone Win9x bevels (`--bevel-out`, `--bevel-in`).
 - **Accents:** orange and red only. They're flat web-safe colours rather than the brand terracotta, which reads as too dusty and modern for decorations: `--color-retro-amber` `#FF9900`, `--color-retro-orange` `#FF6600`, `--color-retro-red` `#FF3300` and `--color-retro-crimson` `#CC0000`. Yellow gold is reserved for titles (see below); the only other yellow is the DeskPeek poster tone, which comes from the project data. Terminal green (`--color-screen-text`) is only for the counter digits.
 - **Title bars:** a gradient from brand-deep to crimson. The badge header uses the same gradient.

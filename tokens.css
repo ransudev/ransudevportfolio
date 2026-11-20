@@ -10,7 +10,7 @@
   --color-brand-highlight: oklch(0.69558 0.14844 44.31); /* #E77B49 */
 
   /* Page and panels */
-  --color-tile-bg: #0e0514; /* night sky, matches night-tile.gif */
+  --color-tile-bg: #240608; /* red night sky, matches night-tile.gif */
   --color-paper: oklch(0.95 0.025 80);
   --color-paper-2: oklch(0.9 0.04 75);
   --color-ink: oklch(0.18 0.03 28.24);

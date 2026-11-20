@@ -47,8 +47,9 @@ LIME = (0x33, 0xFF, 0x33)
 PINK = (0xFF, 0x99, 0xCC)
 TABBY = (0xFF, 0x88, 0x22)
 BURNT = (0xB3, 0x47, 0x00)
-NIGHT = (0x0E, 0x05, 0x14)
-DUSK = (0x2A, 0x0C, 0x1E)
+# A red night: dark oxblood sky with a warmer haze, to sit with the brand reds.
+NIGHT = (0x24, 0x06, 0x08)
+DUSK = (0x42, 0x0E, 0x10)
 
 PALETTE = [KEY, DEEP, PRIMARY, MID, TERRA, AMBER, ORANGE, RED, CRIMSON, GOLD, YELLOW, HAZARD,
            CREAM, TAN, GREY, DARKGREY, WHITE, BLACK, INK, NAVY, BLUE, SKY, LIME, PINK, TABBY, BURNT, NIGHT, DUSK]
@@ -570,7 +571,7 @@ def banner_sky() -> list[Image.Image]:
     dither_vertical(base, (0, 70, w, 130), DUSK, DEEP)
     dither_vertical(base, (0, 130, w, h), DEEP, PRIMARY)
     rnd = random.Random(1997)
-    stars = [(rnd.randrange(w), rnd.randrange(0, 120), rnd.choice([WHITE, WHITE, YELLOW, GOLD, SKY]), rnd.randrange(3))
+    stars = [(rnd.randrange(w), rnd.randrange(0, 120), rnd.choice([WHITE, WHITE, YELLOW, GOLD, AMBER]), rnd.randrange(3))
              for _ in range(46)]
     big = [(18, 22), (77, 48), (108, 14), (46, 90)]
     frames = []
@@ -661,7 +662,7 @@ def divider_beads() -> list[Image.Image]:
 
 
 def night_tile() -> list[Image.Image]:
-    """The page wallpaper: a tileable night sky to match the banner, with stars twinkling over 3 frames."""
+    """The page wallpaper: a tileable red night sky to match the banner, with stars twinkling over 3 frames."""
     w = h = 128
     rnd = random.Random(2001)
     base = blank(w, h, NIGHT)
@@ -672,7 +673,7 @@ def night_tile() -> list[Image.Image]:
             haze = 0.5 + 0.5 * math.sin((x + y * 0.6) / 128 * math.tau)
             if (x + y) % 2 == 0 and rnd.random() < 0.05 + 0.10 * haze:
                 px[x, y] = DUSK
-    stars = [(rnd.randrange(w), rnd.randrange(h), rnd.choice([WHITE, WHITE, WHITE, YELLOW, GOLD, SKY, PINK]), rnd.randrange(3))
+    stars = [(rnd.randrange(w), rnd.randrange(h), rnd.choice([WHITE, WHITE, CREAM, YELLOW, GOLD, AMBER, PINK]), rnd.randrange(3))
              for _ in range(38)]
     big = [(20, 30), (90, 12), (64, 84), (112, 104), (34, 112)]
     frames = []

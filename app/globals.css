@@ -128,7 +128,7 @@ img {
   background:
     url("/retro/banner-roofs.gif") left bottom / 96px 30px repeat-x,
     url("/retro/banner-sky.gif") left bottom / 128px 176px repeat,
-    #0e0514;
+    var(--color-tile-bg);
   border: 3px ridge var(--color-retro-orange);
   text-align: center;
   image-rendering: pixelated;
@@ -1510,6 +1510,6 @@ a.b88:hover {
     background:
       url("/retro/banner-roofs.png") left bottom / 96px 30px repeat-x,
       url("/retro/banner-sky.png") left bottom / 128px 176px repeat,
-      #0e0514;
+      var(--color-tile-bg);
   }
 }
