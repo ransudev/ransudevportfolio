@@ -331,32 +331,44 @@ img {
   animation: blink 1s steps(2, jump-none) infinite;
 }
 
-/* ---------- Windows ---------- */
+/* ---------- Windows: gold-framed plaques ---------- */
 
+/* Every card is a cream panel in a GeoCities-style orange ridge border, with a thin gold line inside
+ * and its title on a brass nameplate that sits across the top edge. The markup is still the old
+ * window (bar + body), so the bar becomes the nameplate and the _ □ X controls are hidden. */
 .window {
-  padding: 4px;
-  background: var(--color-paper);
-  box-shadow: var(--bevel-out);
+  --plaque-gold: var(--color-title-gold);
+  position: relative;
+  margin-top: 14px;
+  padding: 3px;
+  background: var(--color-brand-deep);
+  border: 6px ridge var(--color-retro-orange);
+  box-shadow: 4px 4px 0 oklch(0 0 0 / 0.45);
 }
 
 .window__bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-xs);
-  min-height: 1.75rem;
-  padding: 2px 4px 2px 6px;
-  background: linear-gradient(90deg, var(--color-brand-deep), var(--color-retro-crimson));
-  color: var(--color-bevel-light);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 2;
+  max-width: calc(100% - 24px);
+  translate: -50% calc(-50% - 5px);
+  padding: 3px 14px;
+  background: linear-gradient(#fff2a8, #ffcc00 50%, #c98f00);
+  border: 2px solid var(--color-ink);
+  box-shadow: inset 1px 1px 0 #fff8d0, 2px 2px 0 oklch(0 0 0 / 0.35);
+  color: #3a1a00;
   font-family: var(--font-display);
   font-size: var(--text-sm);
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .window__title {
   min-width: 0;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -364,30 +376,19 @@ img {
 }
 
 .window__icon {
-  color: var(--color-retro-amber);
+  color: var(--color-retro-crimson);
 }
 
 .window__controls {
-  display: flex;
-  flex: none;
-  gap: 2px;
-}
-
-.window__controls span {
-  width: 1.125rem;
-  height: 1rem;
-  display: grid;
-  place-items: center;
-  background: var(--color-paper-2);
-  box-shadow: inset -1px -1px 0 var(--color-bevel-dark), inset 1px 1px 0 var(--color-bevel-light);
-  color: var(--color-ink);
-  font-family: var(--font-terminal);
-  font-size: 0.9rem;
-  line-height: 1;
+  display: none;
 }
 
 .window__body {
-  padding: var(--space-md);
+  padding: calc(var(--space-md) + 10px) var(--space-md) var(--space-md);
+  background: var(--color-paper);
+  outline: 2px solid var(--plaque-gold);
+  outline-offset: -6px;
+  box-shadow: inset 0 0 0 1px var(--color-ink);
 }
 
 .window__body > :first-child {
@@ -614,8 +615,11 @@ img {
   width: 100%;
   padding: var(--space-xl) var(--space-sm) var(--space-sm);
   background: var(--color-paper);
-  border: 2px solid var(--color-ink);
-  box-shadow: var(--bevel-out), 4px 4px 0 oklch(0 0 0 / 0.45);
+  /* Same plaque frame as the windows: orange ridge border with a gold line inside. */
+  border: 6px ridge var(--color-retro-orange);
+  outline: 2px solid var(--color-title-gold);
+  outline-offset: -6px;
+  box-shadow: inset 0 0 0 1px var(--color-ink), 4px 4px 0 oklch(0 0 0 / 0.45);
   display: grid;
   gap: var(--space-xs);
   transform-origin: 50% 0;
@@ -1084,7 +1088,7 @@ a.project__frame:hover {
 }
 
 .sidebar .window__body {
-  padding: var(--space-sm);
+  padding: calc(var(--space-sm) + 10px) var(--space-sm) var(--space-sm);
 }
 
 .counter {
@@ -1246,7 +1250,7 @@ a.b88:hover {
 
 .perch__cat {
   position: absolute;
-  bottom: calc(100% - 4px);
+  bottom: calc(100% - 18px);
   z-index: 2;
   line-height: 0;
   pointer-events: none;

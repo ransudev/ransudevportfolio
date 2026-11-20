@@ -4,7 +4,7 @@ A locked design system for this portfolio. Read this file before making visual c
 
 ## Genre
 
-A 90s personal homepage, in the Neocities / GeoCities tradition: tiled wallpaper, a sidebar of links, beveled Win9x windows, 88x31 buttons, blinkies, a marquee and a hit counter. It should feel hand-made and a little goofy, but the projects stay easy to find and read.
+A 90s personal homepage, in the Neocities / GeoCities tradition: tiled wallpaper, a sidebar of links, gold-framed plaque cards, 88x31 buttons, blinkies, a marquee and a hit counter. It should feel hand-made and a little goofy, but the projects stay easy to find and read.
 
 ## Audience and task
 
@@ -33,7 +33,7 @@ The four brand colours (supplied by Lance) stay the backbone:
 Around them:
 
 - **Wallpaper:** the banner's red night sky running down the whole page (`page-sky.gif`, a 128x900 tile that repeats sideways). It is pinned to the bottom of the window with `background-attachment: fixed`, so the starry red night fills the top and the oxblood glow sits at the bottom while you scroll. Taller windows fill the top with plain night (`--color-tile-bg` `#240608`). The stars twinkle over 3 frames, and reduced-motion visitors get the still `.png`. Lance also tried a plain dark night, an all-over red night and the original star tile; he chose this one because it matches the header.
-- **Panels:** cream paper (`--color-paper`) with two-tone Win9x bevels (`--bevel-out`, `--bevel-in`).
+- **Cards (gold-framed plaques):** every `.window` (welcome, projects, Skills, About, Contact, `status.txt`) and the ID badge is a cream panel inside a GeoCities-style 6px orange ridge border on oxblood, with a thin gold line inset 6px. The title sits on a brass nameplate (a gold gradient with an ink border) that straddles the top edge, and the old _ □ X controls are hidden. Lance chose this frame from five mocked-up options; the earlier Win98 window frame is still in git history. Buttons, the nav and the inset fields keep the Win9x bevels (`--bevel-out`, `--bevel-in`).
 - **Accents:** orange and red only. They're flat web-safe colours rather than the brand terracotta, which reads as too dusty and modern for decorations: `--color-retro-amber` `#FF9900`, `--color-retro-orange` `#FF6600`, `--color-retro-red` `#FF3300` and `--color-retro-crimson` `#CC0000`. Yellow gold is reserved for titles (see below); the only other yellow is the DeskPeek poster tone, which comes from the project data. Terminal green (`--color-screen-text`) is only for the counter digits.
 - **Title bars:** a gradient from brand-deep to crimson. The badge header uses the same gradient.
 - **WordArt titles:** the banner and section titles are yellow gold. They use `--wordart-fill`, which runs from `#FFFF99` at the top through `#FFCC00` to `#E6A100`. It's clipped to the text, with a 1px ink stroke and a stacked red-then-black `drop-shadow` extrusion. The banner's ★彡 stars are gold too; the ✦ ornaments on section titles stay orange.
