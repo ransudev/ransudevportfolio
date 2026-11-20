@@ -632,11 +632,9 @@ img {
   width: 100%;
   padding: var(--space-xl) var(--space-sm) var(--space-sm);
   background: var(--color-paper);
-  /* Same plaque frame as the windows: orange ridge border with a gold line inside. */
-  border: 6px ridge var(--color-retro-orange);
-  outline: 2px solid var(--color-title-gold);
-  outline-offset: -6px;
-  box-shadow: inset 0 0 0 1px var(--color-ink), 4px 4px 0 oklch(0 0 0 / 0.45);
+  /* The badge keeps its own beveled card edge rather than the cards' plaque frame. */
+  border: 2px solid var(--color-ink);
+  box-shadow: var(--bevel-out), 4px 4px 0 oklch(0 0 0 / 0.45);
   display: grid;
   gap: var(--space-xs);
   transform-origin: 50% 0;
