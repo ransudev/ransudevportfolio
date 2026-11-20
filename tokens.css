@@ -26,13 +26,17 @@
   --color-retro-orange: #ff6600;
   --color-retro-red: #ff3300;
   --color-retro-crimson: #cc0000;
-  /* WordArt fill for the banner and section titles: amber at the top, burning down to red. */
+  /* Titles are the one place for yellow gold, so they pop against the oranges and reds. */
+  --color-title-gold-light: #ffff99;
+  --color-title-gold: #ffcc00;
+  --color-title-gold-deep: #e6a100;
+  /* WordArt fill for the banner and section titles: pale yellow at the top, deepening to gold. */
   --wordart-fill: linear-gradient(
     180deg,
-    var(--color-retro-amber) 0%,
-    var(--color-retro-orange) 40%,
-    var(--color-retro-red) 70%,
-    var(--color-retro-crimson) 100%
+    var(--color-title-gold-light) 0%,
+    var(--color-title-gold) 45%,
+    var(--color-title-gold) 70%,
+    var(--color-title-gold-deep) 100%
   );
 
   /* Links: terracotta is too light on cream for body text, so links use the primary red. */

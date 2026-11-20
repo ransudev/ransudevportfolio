@@ -163,7 +163,7 @@ img {
 
 .banner__stars {
   margin: 0;
-  color: var(--color-retro-orange);
+  color: var(--color-title-gold);
   font-family: var(--font-display);
   font-size: var(--text-xl);
   line-height: 1;
