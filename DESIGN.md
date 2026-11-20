@@ -35,7 +35,8 @@ Around them:
 - **Wallpaper:** a 64px pixel-star tile in the brand colours (an inline SVG data URI in `globals.css`).
 - **Panels:** cream paper (`--color-paper`) with two-tone Win9x bevels (`--bevel-out`, `--bevel-in`).
 - **Title bars:** a gradient from brand-deep to brand-mid, with light text. Don't run it to terracotta, because white text on it fails contrast.
-- **Accents:** gold (`--color-gold`) for headings on dark backgrounds, and terminal green (`--color-screen-text`) only for the counter digits.
+- **Accents:** flat web-safe retro colours, not the brand terracotta, which reads as too dusty and modern for decorations. These are `--color-retro-orange` `#FF6600`, `--color-retro-amber` `#FF9900`, `--color-gold` `#FFCC00` and `--color-retro-yellow` `#FFFF66`. Terminal green (`--color-screen-text`) is only for the counter digits.
+- **WordArt titles:** the banner and section titles use `--wordart-fill`, a yellow-to-orange gradient clipped to the text, with a 1px ink stroke and a stacked red-then-black `drop-shadow` extrusion.
 - **Links:** brand-primary, underlined; visited links go to brand-deep, and hover fills them with terracotta.
 - No rounded corners, soft shadows, glass or gradients-as-decoration beyond title bars and the footer rule.
 

@@ -39,7 +39,7 @@ body {
 }
 
 ::selection {
-  background: var(--color-brand-highlight);
+  background: var(--color-retro-orange);
   color: var(--color-ink);
 }
 
@@ -54,7 +54,7 @@ a:visited {
 }
 
 a:hover {
-  background: var(--color-brand-highlight);
+  background: var(--color-retro-orange);
   color: var(--color-ink);
 }
 
@@ -126,7 +126,7 @@ img {
   background:
     repeating-linear-gradient(0deg, transparent 0 3px, oklch(0 0 0 / 0.12) 3px 4px),
     linear-gradient(180deg, var(--color-brand-deep), var(--color-screen));
-  border: 3px ridge var(--color-brand-highlight);
+  border: 3px ridge var(--color-retro-orange);
   text-align: center;
 }
 
@@ -140,21 +140,30 @@ img {
   text-transform: uppercase;
 }
 
+/* WordArt: a yellow-to-orange fill with a hard red-then-black extrusion.
+ * drop-shadow (not text-shadow) because the text fill is transparent. */
 .banner__title a,
-.banner__title a:visited {
-  color: var(--color-gold);
+.banner__title a:visited,
+.banner__title a:hover {
+  display: inline-block;
+  padding: 0.05em 0.1em;
+  background: var(--wordart-fill);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px var(--color-ink);
   text-decoration: none;
-  text-shadow: 3px 3px 0 var(--color-brand-primary), 6px 6px 0 var(--color-ink);
+  filter: drop-shadow(3px 3px 0 var(--color-brand-primary)) drop-shadow(3px 3px 0 var(--color-ink));
 }
 
 .banner__title a:hover {
-  background: none;
-  color: var(--color-brand-highlight);
+  filter: drop-shadow(3px 3px 0 var(--color-retro-orange)) drop-shadow(3px 3px 0 var(--color-ink));
 }
 
 .banner__stars {
   margin: 0;
-  color: var(--color-brand-highlight);
+  color: var(--color-retro-orange);
   font-family: var(--font-display);
   font-size: var(--text-xl);
   line-height: 1;
@@ -204,7 +213,7 @@ img {
 }
 
 .marquee__star {
-  color: var(--color-brand-highlight);
+  color: var(--color-retro-orange);
 }
 
 @keyframes marquee {
@@ -403,7 +412,7 @@ img {
 .btn--primary:visited {
   background: var(--color-brand-primary);
   color: var(--color-bevel-light);
-  box-shadow: inset -2px -2px 0 var(--color-ink), inset 2px 2px 0 var(--color-brand-highlight),
+  box-shadow: inset -2px -2px 0 var(--color-ink), inset 2px 2px 0 var(--color-retro-orange),
     inset -4px -4px 0 var(--color-brand-deep);
 }
 
@@ -413,7 +422,7 @@ img {
 }
 
 .btn--primary:active {
-  box-shadow: inset 2px 2px 0 var(--color-ink), inset -2px -2px 0 var(--color-brand-highlight);
+  box-shadow: inset 2px 2px 0 var(--color-ink), inset -2px -2px 0 var(--color-retro-orange);
 }
 
 .btn--small {
@@ -429,18 +438,26 @@ img {
 }
 
 .section-title {
+  justify-self: center;
   margin: var(--space-md) 0 0;
-  color: var(--color-gold);
+  padding: 0 0.1em;
+  background: var(--wordart-fill);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px var(--color-ink);
   font-family: var(--font-display);
   font-size: var(--text-xl);
   font-weight: 700;
   line-height: 1.1;
   text-align: center;
-  text-shadow: 2px 2px 0 var(--color-brand-primary), 4px 4px 0 var(--color-ink);
+  filter: drop-shadow(2px 2px 0 var(--color-brand-primary)) drop-shadow(2px 2px 0 var(--color-ink));
 }
 
 .section-title span {
-  color: var(--color-brand-highlight);
+  -webkit-text-fill-color: var(--color-retro-orange);
+  -webkit-text-stroke: 0;
 }
 
 .section-lede {
@@ -765,7 +782,7 @@ a.project__frame:hover {
   inset-inline-end: var(--space-sm);
   padding: 4px var(--space-sm);
   background: var(--color-brand-primary);
-  box-shadow: inset -2px -2px 0 var(--color-ink), inset 2px 2px 0 var(--color-brand-highlight);
+  box-shadow: inset -2px -2px 0 var(--color-ink), inset 2px 2px 0 var(--color-retro-orange);
   color: var(--color-bevel-light);
   font-family: var(--font-terminal);
   font-size: var(--text-md);
@@ -914,7 +931,7 @@ a.project__frame:hover {
 
 .toolbox__list li::before {
   content: "► ";
-  color: var(--color-brand-highlight);
+  color: var(--color-retro-orange);
   font-size: 0.75em;
 }
 
@@ -1019,7 +1036,7 @@ a.project__frame:hover {
 }
 
 .contact__mail {
-  color: var(--color-brand-highlight);
+  color: var(--color-retro-orange);
   font-size: 3rem;
   line-height: 1;
   animation: mail-bob 1.2s steps(2, jump-none) infinite;
@@ -1139,7 +1156,7 @@ a.project__frame:hover {
 }
 
 .blinkie--terracotta {
-  --blink-a: var(--color-brand-highlight);
+  --blink-a: var(--color-retro-orange);
   --blink-b: var(--color-ink);
 }
 
@@ -1203,7 +1220,7 @@ a.b88:hover {
 }
 
 .b88--terracotta {
-  --b88-bg: var(--color-brand-highlight);
+  --b88-bg: var(--color-retro-orange);
   --b88-ink: var(--color-ink);
 }
 
@@ -1246,9 +1263,9 @@ a.b88:hover {
     var(--color-brand-deep),
     var(--color-brand-primary),
     var(--color-brand-mid),
-    var(--color-brand-highlight),
+    var(--color-retro-orange),
     var(--color-gold),
-    var(--color-brand-highlight),
+    var(--color-retro-orange),
     var(--color-brand-mid),
     var(--color-brand-primary),
     var(--color-brand-deep)
@@ -1300,7 +1317,7 @@ a.b88:hover {
 }
 
 .trail__spark:nth-child(3n) {
-  color: var(--color-brand-highlight);
+  color: var(--color-retro-orange);
 }
 
 .trail__spark.is-live {
