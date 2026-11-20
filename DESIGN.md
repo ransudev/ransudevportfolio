@@ -32,7 +32,7 @@ The four brand colours (supplied by Lance) stay the backbone:
 
 Around them:
 
-- **Wallpaper:** a twinkling night sky that continues the banner's night scene: `night-tile.gif`, a 128px tile of dark red night `#240608` with a warmer `#420E10` haze dithered in, and warm white, gold, amber and pink stars that twinkle over 3 frames. The banner's sky uses the same red night at the top, fading into the brand oxblood at the rooftops. The asset script draws it, and reduced-motion visitors get the still `.png`.
+- **Wallpaper:** the original 64px pixel-star tile in the brand colours (an inline SVG data URI in `globals.css`). Lance tried a dark and a red night-sky wallpaper and preferred this one.
 - **Panels:** cream paper (`--color-paper`) with two-tone Win9x bevels (`--bevel-out`, `--bevel-in`).
 - **Accents:** orange and red only. They're flat web-safe colours rather than the brand terracotta, which reads as too dusty and modern for decorations: `--color-retro-amber` `#FF9900`, `--color-retro-orange` `#FF6600`, `--color-retro-red` `#FF3300` and `--color-retro-crimson` `#CC0000`. Yellow gold is reserved for titles (see below); the only other yellow is the DeskPeek poster tone, which comes from the project data. Terminal green (`--color-screen-text`) is only for the counter digits.
 - **Title bars:** a gradient from brand-deep to crimson. The badge header uses the same gradient.

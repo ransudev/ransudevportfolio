@@ -661,38 +661,6 @@ def divider_beads() -> list[Image.Image]:
     return [img]
 
 
-def night_tile() -> list[Image.Image]:
-    """The page wallpaper: a tileable red night sky to match the banner, with stars twinkling over 3 frames."""
-    w = h = 128
-    rnd = random.Random(2001)
-    base = blank(w, h, NIGHT)
-    px = base.load()
-    # A faint, uneven dither of dusk so the sky isn't a flat fill.
-    for y in range(h):
-        for x in range(w):
-            haze = 0.5 + 0.5 * math.sin((x + y * 0.6) / 128 * math.tau)
-            if (x + y) % 2 == 0 and rnd.random() < 0.05 + 0.10 * haze:
-                px[x, y] = DUSK
-    stars = [(rnd.randrange(w), rnd.randrange(h), rnd.choice([WHITE, WHITE, CREAM, YELLOW, GOLD, AMBER, PINK]), rnd.randrange(3))
-             for _ in range(38)]
-    big = [(20, 30), (90, 12), (64, 84), (112, 104), (34, 112)]
-    frames = []
-    for f in range(3):
-        img = base.copy()
-        fpx = img.load()
-        for x, y, col, phase in stars:
-            if phase != f:
-                fpx[x, y] = col
-        for i, (x, y) in enumerate(big):
-            col = WHITE if (i + f) % 3 else GOLD
-            fpx[x, y] = col
-            if (i + f) % 2 == 0:
-                for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
-                    fpx[(x + dx) % w, (y + dy) % h] = col
-        frames.append(img)
-    return frames
-
-
 def main() -> None:
     print(f"Writing to {OUT}")
     save("88-ransu.gif", b88_ransu(), duration=180)
@@ -724,7 +692,6 @@ def main() -> None:
     save("divider-paws.gif", divider_paws(), transparent=True)
     save("divider-stars.gif", divider_stars(), transparent=True)
     save("divider-beads.gif", divider_beads(), transparent=True)
-    save("night-tile.gif", night_tile(), duration=[650, 500, 600])
 
     save("banner-sky.gif", banner_sky(), duration=[700, 500, 600])
     save("banner-roofs.gif", banner_roofs(), transparent=True)
