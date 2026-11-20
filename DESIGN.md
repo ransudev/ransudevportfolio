@@ -4,68 +4,84 @@ A locked design system for this portfolio. Read this file before making visual c
 
 ## Genre
 
-A 90s personal homepage, in the Neocities / GeoCities tradition: tiled wallpaper, a sidebar of links, beveled Win9x windows, 88x31 buttons, blinkies, a marquee and a hit counter. It should feel hand-made and a little goofy, but the projects stay easy to find and read.
+An old-school 90s personal homepage, built the way GeoCities pages were: a table layout centred on a tiled GIF wallpaper, system fonts, underlined links, grey Windows buttons, and lots of small pixel GIFs (88x31 buttons, blinkies, spinning stars, an under-construction sign). It should look hand-made, a little uneven, and never like a polished modern "retro theme". The projects still stay easy to read.
+
+The previous, more polished retro version (pixel web fonts, a Win98 window around every section, CSS-drawn badges) is saved as tag `retro-v1` and branch `retro-v1-snapshot`. Restore it with `git checkout retro-v1 -- .`.
 
 ## Audience and task
 
 - Primary audience: recruiters and potential collaborators.
 - Primary task: evaluate the work, then contact Lance.
-- Content rule: projects are proof. Decorations live in the sidebar, banner and footer; they never sit between a visitor and a project.
+- Content rule: projects are proof. Decorations live in the sidebar, banner and footer, and never sit between a visitor and a project.
 
 ## Macrostructure
 
-One page, in this order: Banner → Marquee → (Sidebar | Welcome → Projects → Skills → About → Contact) → Footer.
+One page, in this order: Banner → Marquee → flame divider → (Sidebar | Welcome → Projects → Skills → About → Contact) → Footer.
 
-- **Banner:** the page's only `<h1>` ("Ransu.dev") in Pixelify Sans with stacked hard text shadows, plus the tagline "Break it. Fix it. Ship it."
-- **Marquee:** a sunken "screen" strip with site news (`app/data/badges.ts`). Pauses on hover.
-- **Sidebar** (sticky on desktop): the nav window with active-section highlight, `status.txt`, the hit counter, blinkies and the 88x31 button wall. Under 48rem the nav becomes a sticky one-row bar at the top and the extras move below the content.
-- **Welcome** (`welcome.html` window): greeting, CTAs ("See my projects", "Get in touch"), an under-construction sign, and the lanyard ID badge.
-- **Projects:** one window per project, titled `name.exe`, with an address bar, a sunken screenshot frame, and a NEW! tag on the featured project. The featured project's screenshot spans the full width; the rest sit media-left, text-right. Projects without a screenshot get a scanlined poster in their tone colour with a file icon.
-- **Skills** (`C:\RANSU\TOOLS`), **About** (`about_me.txt`), **Contact** (`new_message.eml`): windows holding lists and beveled tables.
-- Section titles are `<h2>`s in WordArt Pixelify Sans with ✦ ornaments, sitting directly on the wallpaper.
+- **Page width:** fixed at 780px (the 800x600 era), centred on the wallpaper. Nothing is sticky.
+- **Banner:** the page's only `<h1>`, as WordArt between two spinning-star GIFs, plus a Comic Sans tagline.
+- **Marquee:** a black strip with bold orange Arial news (`app/data/badges.ts`). It pauses on hover.
+- **Sidebar:** a tan, ridge-bordered column holding:
+  - a red "Navigation" header cell and the links, with GIF bullets and `<<` beside the current section;
+  - the status table;
+  - the LED hit counter;
+  - the blinkies;
+  - the 88x31 wall;
+  - a "thanks 4 visiting!" line.
+- **Sections:** each one is a WordArt `<h2>`, then an image divider (flame, stars or beads, varied on purpose), then a cream ridge-bordered panel, then an "↑ back to top" link (`app/components/retro/Section.tsx`).
+- **Welcome:** a Comic Sans greeting, grey buttons, the under-construction GIF, and the lanyard badge.
+- **Projects:** rows split by `<hr>`. Each row puts a screenshot in a small Win98 "browser" window (`RetroWindow`, the only place window chrome is used) beside the text. The featured project spans the full width and gets a NEW! GIF. Links are bracketed text: `[ Live site ] [ Source code ]`.
+- **Skills, About, Contact:** bordered tables with tan header cells. The About photo floats left, with the text wrapping around it.
+- **Footer:** a bead divider, bracketed links, "last updated", "best viewed at 800x600".
 
-## Theme
+## Colour
 
-The four brand colours (supplied by Lance) stay the backbone:
-
-- `--color-brand-deep` `#60241E` · `--color-brand-primary` `#95271D` · `--color-brand-mid` `#B34A44` · `--color-brand-highlight` `#E77B49`
-
-Around them:
-
-- **Wallpaper:** a 64px pixel-star tile in the brand colours (an inline SVG data URI in `globals.css`).
-- **Panels:** cream paper (`--color-paper`) with two-tone Win9x bevels (`--bevel-out`, `--bevel-in`).
-- **Accents:** orange and red only. They're flat web-safe colours rather than the brand terracotta, which reads as too dusty and modern for decorations: `--color-retro-amber` `#FF9900`, `--color-retro-orange` `#FF6600`, `--color-retro-red` `#FF3300` and `--color-retro-crimson` `#CC0000`. Yellow gold is reserved for titles (see below); the only other yellow is the DeskPeek poster tone, which comes from the project data. Terminal green (`--color-screen-text`) is only for the counter digits.
-- **Title bars:** a gradient from brand-deep to crimson. The badge header uses the same gradient.
-- **WordArt titles:** the banner and section titles are yellow gold. They use `--wordart-fill`, which runs from `#FFFF99` at the top through `#FFCC00` to `#E6A100`. It's clipped to the text, with a 1px ink stroke and a stacked red-then-black `drop-shadow` extrusion. The banner's ★彡 stars are gold too; the ✦ ornaments on section titles stay orange.
+- **Brand oxblood** (`--color-brand-deep` `#60241E`, `--color-brand-primary` `#95271D`): the wallpaper and the WordArt extrusion.
+- **Orange and red accents:** `#FF9900`, `#FF6600`, `#FF3300`, `#CC0000`.
+- **Yellow gold:** titles only (`--wordart-fill`, `#FFFF99` → `#FFCC00` → `#E6A100`). The hazard yellow on the construction sign is the only other yellow.
+- **Panels:** cream paper. The sidebar and table headers are tan.
+- **Links:** classic underlined `#CC3300`; visited `#800040`, hover `#FF6600`. On the wallpaper, links are amber.
+- **Buttons:** Windows grey `#C0C0C0` with white and dark bevel borders.
+- **Project screenshot windows:** the Win98 navy-to-blue title bar, kept on purpose as a "browser" cue.
 
 ## Typography
 
-- **Display:** Pixelify Sans 400/700, for the banner, section titles, window titles, nav and project names.
-- **Terminal:** VT323, for buttons, labels, metadata, the marquee, the counter, badges and the lanyard text.
-- **Body:** a Times New Roman / Georgia system serif stack, the authentic browser default. Keep it for paragraphs; it's what keeps long text readable.
+System fonts only; no web fonts.
+
+- **WordArt titles:** Arial Black / Impact, with the gold gradient fill, a 1px ink stroke and a red-then-black `drop-shadow` extrusion (`.wordart`).
+- **Body:** Times New Roman, 17px.
+- **Sidebar, tables, footer and small print:** Verdana at 11–14px.
+- **Greetings, captions and asides:** Comic Sans MS.
+- **Project titles, the marquee and the email address:** bold Arial.
+- **Counter digits:** Courier New.
+
+## Pixel GIFs
+
+- `scripts/make-retro-assets.py` draws every decoration with Pillow, pixel by pixel, using a hand-made 5x7 bitmap font. It writes `public/retro/*.gif`, plus a `.png` still of each GIF's first frame. Re-run it after changing anything.
+- Nothing is hotlinked or downloaded.
+- Render GIFs with `RetroImg` (`app/components/retro/Badges.tsx`), always at their native size with `image-rendering: pixelated`. It serves the `.png` still to reduced-motion visitors.
+- Decorative images have empty alt text. Meaningful ones (NEW!, the 88x31 buttons, the blinkies) have real alt text.
+- Dividers are repeat-x backgrounds of small GIF tiles.
 
 ## Motion
 
-- Everything blinks in `steps()`, never eased: the NEW! tag, blinkies, the active-nav arrow and the bobbing mail icon.
-- **Marquee:** 45s linear loop with duplicated content.
-- **Cursor trail:** a pool of 18 recycled sparkles, on fine pointers only.
-- **Lanyard:** the one physical motion. It drops in, swings on a spring and can be dragged (swing capped at 90° each side, card tilt at 20°).
-- **Reduced motion:** blinking stops, the marquee becomes a static wrapped list, the trail is removed, and the lanyard hangs still.
+- The GIFs carry most of the motion.
+- The marquee loops in 40s, and the cursor trail is 18 recycled sparkles on fine pointers.
+- The lanyard is the one physical motion. It drops in, swings on a spring and can be dragged (swing capped at 90° each side, card tilt at 20°).
+- **Reduced motion:** still PNGs replace the GIFs (including the wallpaper, bullets and flame divider), the marquee becomes a static wrapped list, the trail is removed, and the lanyard hangs still.
 
-## Microinteractions
+## Microinteractions and accessibility
 
-- Buttons press in: the bevel inverts on `:active`.
-- Focus rings are a 3px dotted outline, red on paper and amber on dark backgrounds.
-- Touch targets are at least 44px for buttons, nav links and footer links. The 88x31 buttons are 31px tall by definition, so they only ever duplicate links that exist elsewhere.
-
-## Decorations
-
-All decorations are made in CSS: 88x31 buttons, blinkies, the under-construction sign and the counter. Don't hotlink third-party GIFs. Add new badges in `app/data/badges.ts`. Decorative pieces are `aria-hidden`.
+- Grey buttons press in: the border bevel inverts on `:active`.
+- Focus rings are a 2px dotted outline, ink on panels and amber on the wallpaper.
+- Touch targets are at least 44px for buttons, nav links, bracketed project links, back-to-top links and footer links. The 88x31 buttons are 31px tall by definition, so they only ever duplicate links found elsewhere.
+- Under 48rem, the sidebar's links become a `[ Home | Projects | … ]` bar under the banner, and the extras move below the content.
 
 ## Files
 
 - Tokens: `tokens.css`
 - Styles: `app/globals.css`
-- Retro components: `app/components/retro/` (`RetroWindow`, `Marquee`, `HitCounter`, `CursorTrail`, `Badges`)
+- Asset script: `scripts/make-retro-assets.py` → `public/retro/`
+- Retro components: `app/components/retro/` (`Section`, `RetroWindow`, `Marquee`, `HitCounter`, `CursorTrail`, `Badges`)
 - Shell: `app/page.tsx`, `app/components/sections/Sidebar.tsx`, `Footer.tsx`
 - Badge: `app/components/ui/HeroLanyard.tsx`
