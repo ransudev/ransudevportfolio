@@ -30,12 +30,13 @@ AI-accelerated engineer. Lance uses AI as a force multiplier, not a crutch — p
 
 ## Brand Personality
 
-Playful and expressive. The portfolio carries personality — bold typography, saturated color fields, floating shapes, and blunt copy. It reads like a poster, not a resume. The voice is direct ("Break it. Fix it. Ship it.") but warm, not aggressive.
+Playful, nostalgic and hand-made. The portfolio is a 90s personal homepage: tiled wallpaper, beveled windows, blinkies, a hit counter and a marquee. It should feel like someone built it for fun, while the work itself stays easy to scan. The voice is direct ("Break it. Fix it. Ship it.") but warm and a little goofy.
 
 ## Anti-references
 
 - Generic minimalism: flat beige-and-gray, timid palettes, safe layouts that look like every other developer portfolio.
 - SaaS startup templates: gradient-heavy, glassmorphism, soft shadows, interchangeable hero sections.
+- Retro as parody: unreadable Comic Sans walls, auto-playing MIDI, or gimmicks that hide the projects.
 
 ## Design Principles
 

@@ -14,7 +14,7 @@ const KNOCK_LIMIT = 8;
 const KNOCK_ANGLE = 7;
 const DRAG_THRESHOLD = 4;
 const SWING_SPRING = { stiffness: 60, damping: 7, mass: 1.1 };
-const STRAP_TEXT = Array.from({ length: 16 }, () => "RANSU.DEV").join(" · ");
+const STRAP_TEXT = Array.from({ length: 16 }, () => "RANSU.DEV").join(" ★ ");
 
 interface DragState {
   pointerId: number;
@@ -47,13 +47,13 @@ export default function HeroLanyard() {
   // This is a direct, capped share of the swing: a spring here fed back into itself and spun the card around.
   const cardTilt = useTransform(swing, (value) => clamp(value * -0.3, -MAX_CARD_TILT, MAX_CARD_TILT));
 
-  // Run the strap from the badge up to the top of the hero, or to the headline when stacked.
+  // Run the strap from the badge up to the top of the welcome window, or to the copy when stacked.
   useEffect(() => {
     const root = rootRef.current;
-    const hero = root?.closest<HTMLElement>(".neo-hero");
+    const hero = root?.closest<HTMLElement>(".welcome");
     if (!root || !hero) return;
 
-    const copy = hero.querySelector<HTMLElement>(".neo-hero__copy");
+    const copy = hero.querySelector<HTMLElement>(".welcome__copy");
 
     // Layout offsets ignore transforms, so the drop-in animation and the swing can't skew the measurement.
     const topWithinHero = (el: HTMLElement) => {
@@ -70,7 +70,7 @@ export default function HeroLanyard() {
       const rootTop = topWithinHero(root);
       const copyBottom = copy ? topWithinHero(copy) + copy.offsetHeight : 0;
       const isStacked = copyBottom <= rootTop;
-      const top = isStacked ? copyBottom + 16 : -8;
+      const top = isStacked ? copyBottom + 16 : 0;
       setStrapLength(Math.max(48, Math.round(rootTop - top)));
     };
 
@@ -203,8 +203,8 @@ export default function HeroLanyard() {
         >
           <span className="lanyard__slot" aria-hidden="true" />
           <div className="lanyard__header">
-            <span>ransu.dev</span>
-            <span>ID 001</span>
+            <span>★ RANSU.DEV</span>
+            <span>ID#001</span>
           </div>
           <div className="lanyard__photo">
             <Image

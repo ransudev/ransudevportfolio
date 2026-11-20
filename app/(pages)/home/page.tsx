@@ -1,35 +1,42 @@
-import { ArrowRight } from "lucide-react";
-import MarqueeDivider from "../../components/ui/MarqueeDivider";
-import HeroDecor from "../../components/ui/HeroDecor";
 import HeroLanyard from "../../components/ui/HeroLanyard";
+import RetroWindow from "../../components/retro/RetroWindow";
+import { SpinStar, UnderConstruction } from "../../components/retro/Badges";
 
 export default function HomePage() {
   return (
-    <section id="home" className="neo-hero scroll-section" aria-labelledby="home-title">
-      <HeroDecor />
-      <div className="page neo-hero__inner">
-        <div className="neo-hero__grid">
-          <div className="neo-hero__copy">
-            <h1 id="home-title">
-              <span className="neo-hero__mark">Break it.</span>
-              <span className="neo-hero__mark neo-hero__mark--delay">Fix it.</span>
-              <span className="neo-hero__mark neo-hero__mark--delay-2">Ship it.</span>
-            </h1>
-            <div className="neo-hero__actions">
-              <a href="#projects" className="btn btn--outline neo-hero__primary-action">
-                See the work <ArrowRight size={20} aria-hidden="true" />
-              </a>
-              <a href="#contact" className="text-link neo-hero__secondary-action">
-                Get in touch
-              </a>
+    <section id="home" className="scroll-section" aria-labelledby="home-title">
+      <RetroWindow title="welcome.html" icon="★" className="welcome-window">
+        <div className="welcome">
+          <div className="welcome__copy">
+            <h2 id="home-title" className="welcome__title">
+              <SpinStar /> Welcome 2 my homepage!! <SpinStar />
+            </h2>
+            <p>
+              Hi, I&apos;m <strong>Lance</strong>, a computer science student from the Philippines. I build desktop
+              tools, web apps and game mods. I take the problem apart, then ship something that works.
+            </p>
+            <p>
+              Grab my ID badge and give it a swing, or skip straight to the good stuff:
+            </p>
+            <div className="welcome__cta">
+              <div className="welcome__actions">
+                <a href="#projects" className="btn btn--primary">
+                  ► See my projects
+                </a>
+                <a href="#contact" className="btn">
+                  ✉ Get in touch
+                </a>
+              </div>
+              <UnderConstruction />
             </div>
+            <p className="welcome__note">
+              this site is always under construction. so am i.
+            </p>
           </div>
 
           <HeroLanyard />
         </div>
-      </div>
-
-      <MarqueeDivider className="neo-strip--hero" />
+      </RetroWindow>
     </section>
   );
 }

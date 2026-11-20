@@ -1,36 +1,57 @@
-/* Impeccable · system: neo-brutalist poster · strategy: full palette
- * voice: blunt · mechanical · warm · imagery: intentionally deferred
+/* Ransu portfolio · system: 90s personal homepage · strategy: oxblood tile + cream panels
+ * voice: blunt · warm · a little goofy · imagery: hand-made pixel decorations
  */
 
 :root {
-  --color-paper: oklch(0.96 0.006 28.24);
-  --color-paper-2: oklch(0.91 0.025 44.31);
-  --color-paper-3: oklch(0.86 0.045 44.31);
-  --color-ink: oklch(0.16 0.025 28.24);
-  --color-ink-2: oklch(0.28 0.05 28.24);
-  --color-muted: oklch(0.42 0.06 28.24);
-  --color-rule: var(--color-ink);
-  --color-rule-2: oklch(0.34772 0.08896 28.24);
+  /* Brand colors (supplied by Lance; keep these four). */
+  --color-brand-deep: oklch(0.34772 0.08896 28.24); /* #60241E */
+  --color-brand-primary: oklch(0.44694 0.14751 29.38); /* #95271D */
+  --color-brand-mid: oklch(0.54636 0.13828 25.94); /* #B34A44 */
+  --color-brand-highlight: oklch(0.69558 0.14844 44.31); /* #E77B49 */
 
-  --color-brand-deep: oklch(0.34772 0.08896 28.24);
-  --color-brand-primary: oklch(0.44694 0.14751 29.38);
-  --color-brand-mid: oklch(0.54636 0.13828 25.94);
-  --color-brand-highlight: oklch(0.69558 0.14844 44.31);
+  /* Page and panels */
+  --color-tile-bg: #240608; /* the red night at the top of page-sky.gif */
+  --color-paper: oklch(0.95 0.025 80);
+  --color-paper-2: oklch(0.9 0.04 75);
+  --color-ink: oklch(0.18 0.03 28.24);
+  --color-ink-2: oklch(0.34 0.05 28.24);
+  --color-bevel-light: oklch(0.99 0.01 80);
+  --color-bevel-mid: oklch(0.72 0.04 60);
+  --color-bevel-dark: oklch(0.3 0.05 28.24);
+  --color-screen: oklch(0.16 0.03 28.24);
+  --color-screen-text: oklch(0.85 0.17 135);
+  /* Retro accents: flat, fully saturated web-safe oranges and reds, the way 90s pages did colour.
+   * The brand terracotta is too dusty and modern for decorations, so they use these instead. */
+  --color-retro-amber: #ff9900;
+  --color-retro-orange: #ff6600;
+  --color-retro-red: #ff3300;
+  --color-retro-crimson: #cc0000;
+  /* Titles are the one place for yellow gold, so they pop against the oranges and reds. */
+  --color-title-gold-light: #ffff99;
+  --color-title-gold: #ffcc00;
+  --color-title-gold-deep: #e6a100;
+  /* WordArt fill for the banner and section titles: pale yellow at the top, deepening to gold. */
+  --wordart-fill: linear-gradient(
+    180deg,
+    var(--color-title-gold-light) 0%,
+    var(--color-title-gold) 45%,
+    var(--color-title-gold) 70%,
+    var(--color-title-gold-deep) 100%
+  );
+
+  /* Links: terracotta is too light on cream for body text, so links use the primary red. */
+  --color-link: var(--color-brand-primary);
+  --color-link-visited: var(--color-brand-deep);
+  --color-focus: var(--color-brand-primary);
+
+  /* Poster tones for projects without a screenshot */
   --color-pop-blue: oklch(0.47 0.145 252);
-  --color-pop-blue-soft: oklch(0.84 0.075 252);
   --color-pop-yellow: oklch(0.84 0.16 86);
   --color-pop-pink: oklch(0.76 0.12 8);
-  --color-accent: var(--color-brand-highlight);
-  --color-accent-hover: var(--color-brand-mid);
-  --color-accent-ink: var(--color-ink);
-  --color-focus: var(--color-brand-primary);
-  --color-error: oklch(0.48 0.18 25);
-  --color-success: oklch(0.48 0.12 145);
-  --color-transparent: transparent;
 
-  --font-display: var(--font-outfit);
-  --font-body: var(--font-geist-sans);
-  --font-outlier: var(--font-geist-mono);
+  --font-display: var(--font-pixelify), "Courier New", monospace;
+  --font-terminal: var(--font-vt323), "Courier New", monospace;
+  --font-body: "Times New Roman", Times, Georgia, serif;
 
   --space-3xs: 0.125rem;
   --space-2xs: 0.25rem;
@@ -39,52 +60,26 @@
   --space-md: 1rem;
   --space-lg: 1.5rem;
   --space-xl: 2.5rem;
-  --space-2xl: 4rem;
-  --space-3xl: 6rem;
-  --space-4xl: 9rem;
 
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
   --text-md: 1.25rem;
-  --text-lg: 1.5625rem;
-  --text-xl: 1.953rem;
-  --text-2xl: 2.441rem;
-  --text-3xl: 3.052rem;
-  --text-4xl: 3.815rem;
-  --text-display-s: clamp(2.75rem, 6vw, 4.75rem);
-  --text-display: clamp(3.25rem, 9vw, 6rem);
+  --text-lg: 1.5rem;
+  --text-xl: 2rem;
+  --text-2xl: clamp(2rem, 6vw, 3.25rem);
 
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
-  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-micro: 120ms;
-  --dur-short: 180ms;
-  --dur-medium: 260ms;
-  --dur-long: 350ms;
+  /* Win9x-style bevels: two-tone borders drawn with inset shadows. */
+  --bevel-out: inset -2px -2px 0 var(--color-bevel-dark), inset 2px 2px 0 var(--color-bevel-light),
+    inset -4px -4px 0 var(--color-bevel-mid);
+  --bevel-in: inset 2px 2px 0 var(--color-bevel-dark), inset -2px -2px 0 var(--color-bevel-light),
+    inset 4px 4px 0 var(--color-bevel-mid);
 
-  --rule-hair: 3px;
-  --rule-heavy: 5px;
-  --radius-sm: 0;
-  --radius-card: 0.25rem;
-  --radius-pill: 999px;
-  --shadow-offset-sm: var(--space-2xs);
-  --shadow-offset-lg: var(--space-xs);
-  --shadow-offset-xl: var(--space-sm);
-  --shadow-hard-sm: var(--shadow-offset-sm) var(--shadow-offset-sm) 0 var(--color-ink);
-  --shadow-hard: var(--shadow-offset-lg) var(--shadow-offset-lg) 0 var(--color-ink);
-  --shadow-hard-lg: var(--shadow-offset-xl) var(--shadow-offset-xl) 0 var(--color-ink);
-  --section-space: clamp(var(--space-2xl), 8vw, var(--space-4xl));
-  --section-space-tight: clamp(var(--space-xl), 6vw, var(--space-3xl));
-  --page-gutter: clamp(1rem, 4vw, 4rem);
-  --content-max: 82rem;
+  --page-max: 62rem;
+  --sidebar-width: 13.5rem;
+  --page-gutter: 1rem;
 
-  --z-base: 1;
-  --z-raised: 10;
-  --z-dropdown: 100;
-  --z-sticky: 200;
-  --z-modal: 400;
+  --z-trail: 900;
   --z-toast: 500;
-  --z-tooltip: 600;
+  --z-sticky: 200;
 }

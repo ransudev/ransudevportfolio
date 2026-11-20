@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Check, Copy, Github, Mail, MessageCircle } from "lucide-react";
+import RetroWindow from "../../components/retro/RetroWindow";
+import { Perch } from "../../components/retro/Cats";
 import { contactInfo, socialLinks } from "../../data/socials";
+import { BackToTop, Divider, RetroImg } from "../../components/retro/Badges";
 
 type CopyTarget = "email" | "discord";
 
@@ -31,62 +33,72 @@ export default function ContactPage() {
   };
 
   return (
-    <section id="contact" className="page contact-page scroll-section" aria-labelledby="contact-title">
-      <header className="page-intro" data-reveal="heading">
-        <h2 id="contact-title" className="page-title">Contact</h2>
-      </header>
+    <section id="contact" className="scroll-section section" aria-labelledby="contact-title">
+      <h2 id="contact-title" className="section-title">
+        <span aria-hidden="true">✦ </span>Contact<span aria-hidden="true"> ✦</span>
+      </h2>
+      <Divider kind="paws" />
 
-      <div className="contact-finale" data-reveal="group">
-        <div className="contact-finale__main">
-          <h3 className="contact-finale__pitch">Got something to ship?</h3>
-          <a href={`mailto:${contactInfo.email}`} className="contact-finale__email">
-            {emailUser}@<wbr />{emailDomain}
-          </a>
-          <div className="contact-finale__actions">
-            <a href={`mailto:${contactInfo.email}`} className="btn btn--primary">
-              <Mail size={20} aria-hidden="true" /> Send an email
+      <Perch pose="sit" side="left">
+        <RetroWindow title="new_message.eml" icon="✉">
+          <div className="contact">
+            <p className="contact__pitch">
+              <RetroImg src="/retro/mail.gif" width={34} height={24} /> Got something to ship? E-mail me!!{" "}
+              <RetroImg src="/retro/mail.gif" width={34} height={24} />
+            </p>
+                      <a href={`mailto:${contactInfo.email}`} className="contact__email">
+              {emailUser}@<wbr />{emailDomain}
             </a>
-            <button type="button" className="btn btn--outline" onClick={() => copy("email", contactInfo.email)}>
-              {copied === "email" ? <Check size={20} aria-hidden="true" /> : <Copy size={20} aria-hidden="true" />}
-              {copied === "email" ? "Copied" : "Copy email"}
-            </button>
-          </div>
-        </div>
-
-        <ul className="contact-channels" aria-label="Other ways to reach me">
-          {github && (
-            <li className="contact-channel">
-              <Github size={24} aria-hidden="true" />
-              <div className="contact-channel__text">
-                <span className="contact-channel__label">GitHub</span>
-                <span className="contact-channel__value">github.com/ransudev</span>
-              </div>
-              <a href={github.url} target="_blank" rel="noopener noreferrer" className="contact-channel__action" aria-label="Open GitHub profile">
-                <ArrowUpRight size={22} aria-hidden="true" />
+            <div className="contact__actions">
+              <a href={`mailto:${contactInfo.email}`} className="btn btn--primary">
+                ✉ Send an email
               </a>
-            </li>
-          )}
-          <li className="contact-channel">
-            <MessageCircle size={24} aria-hidden="true" />
-            <div className="contact-channel__text">
-              <span className="contact-channel__label">Discord</span>
-              <span className="contact-channel__value">@{contactInfo.discord}</span>
+              <button type="button" className="btn" onClick={() => copy("email", contactInfo.email)}>
+                {copied === "email" ? "✓ Copied!" : "⧉ Copy email"}
+              </button>
             </div>
-            <button
-              type="button"
-              className="contact-channel__action"
-              aria-label={copied === "discord" ? "Discord username copied" : "Copy Discord username"}
-              onClick={() => copy("discord", contactInfo.discord)}
-            >
-              {copied === "discord" ? <Check size={22} aria-hidden="true" /> : <Copy size={22} aria-hidden="true" />}
-            </button>
-          </li>
-        </ul>
+          </div>
 
-        <p className="sr-only" aria-live="polite">
-          {copied === "email" ? "Email address copied" : copied === "discord" ? "Discord username copied" : ""}
-        </p>
-      </div>
+          <table className="facts contact__channels">
+            <caption>~ other ways to reach me ~</caption>
+            <tbody>
+              {github && (
+                <tr>
+                  <th scope="row">GitHub</th>
+                  <td>
+                    <a href={github.url} target="_blank" rel="noopener noreferrer">
+                      github.com/ransudev
+                    </a>
+                  </td>
+                </tr>
+              )}
+              <tr>
+                <th scope="row">Discord</th>
+                <td>
+                  <span>@{contactInfo.discord}</span>{" "}
+                  <button
+                    type="button"
+                    className="btn btn--small"
+                    aria-label={copied === "discord" ? "Discord username copied" : "Copy Discord username"}
+                    onClick={() => copy("discord", contactInfo.discord)}
+                  >
+                    {copied === "discord" ? "✓ Copied" : "⧉ Copy"}
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Guestbook</th>
+                <td>no guestbook yet, so the email up there is the guestbook ✉</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p className="sr-only" aria-live="polite">
+            {copied === "email" ? "Email address copied" : copied === "discord" ? "Discord username copied" : ""}
+          </p>
+        </RetroWindow>
+      </Perch>
+      <BackToTop />
     </section>
   );
 }

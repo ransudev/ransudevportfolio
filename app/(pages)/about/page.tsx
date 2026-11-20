@@ -1,36 +1,44 @@
-import type { CSSProperties } from "react";
-import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import RetroWindow from "../../components/retro/RetroWindow";
 import { aboutParagraphs, infoCards } from "../../data/about";
+import { BackToTop, Divider } from "../../components/retro/Badges";
 
 export default function AboutPage() {
   return (
-    <article id="about" className="page document-page scroll-section" aria-labelledby="about-title">
-      <header className="page-intro" data-reveal="heading">
-        <h2 id="about-title" className="page-title">About</h2>
-      </header>
+    <section id="about" className="scroll-section section" aria-labelledby="about-title">
+      <h2 id="about-title" className="section-title">
+        <span aria-hidden="true">✦ </span>About Me<span aria-hidden="true"> ✦</span>
+      </h2>
+      <Divider kind="stars" />
 
-      <div className="document-page__body">
-        <div className="document-page__lead" data-reveal="copy">
-          {aboutParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+      <RetroWindow title="about_me.txt" icon="☺">
+        <div className="about">
+          <figure className="about__photo">
+            <Image src="/lance-pixel-avatar.png" alt="Pixel portrait of Lance" width={160} height={160} />
+            <figcaption>this is me (pixelated)</figcaption>
+          </figure>
+          <div className="about__copy">
+            {aboutParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+          </div>
         </div>
 
-        <section className="document-section" aria-labelledby="at-a-glance-title">
-          <h3 id="at-a-glance-title" className="document-section__title" data-reveal="title">At a glance</h3>
-          <div className="fact-list">
-            {infoCards.map((card, index) => (
-              <div key={card.title} className="fact-list__row" data-reveal="item" style={{ "--reveal-index": index } as CSSProperties}>
-                <span>{card.title}</span>
-                <strong>{card.value}</strong>
-              </div>
+        <table className="facts">
+          <caption>~ at a glance ~</caption>
+          <tbody>
+            {infoCards.map((card) => (
+              <tr key={card.title}>
+                <th scope="row">{card.title}</th>
+                <td>{card.value}</td>
+              </tr>
             ))}
-          </div>
-        </section>
+          </tbody>
+        </table>
 
-        <p className="document-page__close" data-reveal="copy">
-          Got a problem that needs taking apart? {" "}
-          <a href="#contact" className="text-link">Start a conversation <ArrowRight size={18} aria-hidden="true" /></a>
+        <p className="about__close">
+          Got a problem that needs taking apart? <a href="#contact">Drop me a line ►</a>
         </p>
-      </div>
-    </article>
+      </RetroWindow>
+      <BackToTop />
+    </section>
   );
 }
