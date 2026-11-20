@@ -26,10 +26,6 @@ export default function SkillsPage() {
               </section>
             ))}
           </div>
-          <p className="toolbox__note">
-            These are working tools, not a claim of mastery. I keep the stack lean and add depth where the work demands
-            it.
-          </p>
         </RetroWindow>
       </Perch>
       <BackToTop />

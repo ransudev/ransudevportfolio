@@ -939,12 +939,6 @@ a.project__frame:hover {
   font-size: 0.75em;
 }
 
-.toolbox__note {
-  margin-top: var(--space-md);
-  color: var(--color-ink-2);
-  font-style: italic;
-}
-
 /* ---------- About ---------- */
 
 .about {
