@@ -5,24 +5,28 @@ export default function Footer() {
 
   return (
     <footer className="site-footer">
-      <div className="site-footer__inner">
-        <div className="site-footer__meta">
-          <a href="#home" className="site-footer__brand">ransu.dev</a>
-          <div className="site-footer__links" aria-label="Social links">
-            {socialLinks.map((social) => (
-              <a
-                key={social.name}
-                href={social.url}
-                target={social.url.startsWith("http") ? "_blank" : undefined}
-                rel={social.url.startsWith("http") ? "noopener noreferrer" : undefined}
-              >
-                {social.name}
-              </a>
-            ))}
-          </div>
-          <span>© {currentYear} ransudev</span>
-        </div>
-      </div>
+      <hr className="rainbow-rule" />
+      <p className="site-footer__links">
+        [{" "}
+        {socialLinks.map((social, index) => (
+          <span key={social.name}>
+            {index > 0 && " | "}
+            <a
+              href={social.url}
+              target={social.url.startsWith("http") ? "_blank" : undefined}
+              rel={social.url.startsWith("http") ? "noopener noreferrer" : undefined}
+            >
+              {social.name}
+            </a>
+          </span>
+        ))}
+        {" | "}
+        <a href="#home">Back to top ▲</a>{" "}
+        ]
+      </p>
+      <p className="site-footer__meta">
+        © {currentYear} ransudev · made by hand (ish) · best viewed in any browser, honestly
+      </p>
     </footer>
   );
 }

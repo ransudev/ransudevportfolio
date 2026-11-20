@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Check, Copy, Github, Mail, MessageCircle } from "lucide-react";
+import RetroWindow from "../../components/retro/RetroWindow";
 import { contactInfo, socialLinks } from "../../data/socials";
 
 type CopyTarget = "email" | "discord";
@@ -31,62 +31,62 @@ export default function ContactPage() {
   };
 
   return (
-    <section id="contact" className="page contact-page scroll-section" aria-labelledby="contact-title">
-      <header className="page-intro" data-reveal="heading">
-        <h2 id="contact-title" className="page-title">Contact</h2>
-      </header>
+    <section id="contact" className="scroll-section section" aria-labelledby="contact-title">
+      <h2 id="contact-title" className="section-title">
+        <span aria-hidden="true">✦ </span>Contact<span aria-hidden="true"> ✦</span>
+      </h2>
 
-      <div className="contact-finale" data-reveal="group">
-        <div className="contact-finale__main">
-          <h3 className="contact-finale__pitch">Got something to ship?</h3>
-          <a href={`mailto:${contactInfo.email}`} className="contact-finale__email">
+      <RetroWindow title="new_message.eml" icon="✉">
+        <div className="contact">
+          <p className="contact__pitch">Got something to ship? E-mail me!!</p>
+          <span className="contact__mail" aria-hidden="true">✉</span>
+          <a href={`mailto:${contactInfo.email}`} className="contact__email">
             {emailUser}@<wbr />{emailDomain}
           </a>
-          <div className="contact-finale__actions">
+          <div className="contact__actions">
             <a href={`mailto:${contactInfo.email}`} className="btn btn--primary">
-              <Mail size={20} aria-hidden="true" /> Send an email
+              ✉ Send an email
             </a>
-            <button type="button" className="btn btn--outline" onClick={() => copy("email", contactInfo.email)}>
-              {copied === "email" ? <Check size={20} aria-hidden="true" /> : <Copy size={20} aria-hidden="true" />}
-              {copied === "email" ? "Copied" : "Copy email"}
+            <button type="button" className="btn" onClick={() => copy("email", contactInfo.email)}>
+              {copied === "email" ? "✓ Copied!" : "⧉ Copy email"}
             </button>
           </div>
         </div>
 
-        <ul className="contact-channels" aria-label="Other ways to reach me">
-          {github && (
-            <li className="contact-channel">
-              <Github size={24} aria-hidden="true" />
-              <div className="contact-channel__text">
-                <span className="contact-channel__label">GitHub</span>
-                <span className="contact-channel__value">github.com/ransudev</span>
-              </div>
-              <a href={github.url} target="_blank" rel="noopener noreferrer" className="contact-channel__action" aria-label="Open GitHub profile">
-                <ArrowUpRight size={22} aria-hidden="true" />
-              </a>
-            </li>
-          )}
-          <li className="contact-channel">
-            <MessageCircle size={24} aria-hidden="true" />
-            <div className="contact-channel__text">
-              <span className="contact-channel__label">Discord</span>
-              <span className="contact-channel__value">@{contactInfo.discord}</span>
-            </div>
-            <button
-              type="button"
-              className="contact-channel__action"
-              aria-label={copied === "discord" ? "Discord username copied" : "Copy Discord username"}
-              onClick={() => copy("discord", contactInfo.discord)}
-            >
-              {copied === "discord" ? <Check size={22} aria-hidden="true" /> : <Copy size={22} aria-hidden="true" />}
-            </button>
-          </li>
-        </ul>
+        <table className="facts contact__channels">
+          <caption>~ other ways to reach me ~</caption>
+          <tbody>
+            {github && (
+              <tr>
+                <th scope="row">GitHub</th>
+                <td>
+                  <a href={github.url} target="_blank" rel="noopener noreferrer">
+                    github.com/ransudev
+                  </a>
+                </td>
+              </tr>
+            )}
+            <tr>
+              <th scope="row">Discord</th>
+              <td>
+                <span>@{contactInfo.discord}</span>{" "}
+                <button
+                  type="button"
+                  className="btn btn--small"
+                  aria-label={copied === "discord" ? "Discord username copied" : "Copy Discord username"}
+                  onClick={() => copy("discord", contactInfo.discord)}
+                >
+                  {copied === "discord" ? "✓ Copied" : "⧉ Copy"}
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
         <p className="sr-only" aria-live="polite">
           {copied === "email" ? "Email address copied" : copied === "discord" ? "Discord username copied" : ""}
         </p>
-      </div>
+      </RetroWindow>
     </section>
   );
 }

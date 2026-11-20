@@ -1,20 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import RetroWindow from "../retro/RetroWindow";
+import HitCounter from "../retro/HitCounter";
+import { BlinkieStack, ButtonWall } from "../retro/Badges";
 
 const navLinks = [
   { href: "#home", id: "home", label: "Home" },
   { href: "#projects", id: "projects", label: "Projects" },
   { href: "#skills", id: "skills", label: "Skills" },
-  { href: "#about", id: "about", label: "About" },
+  { href: "#about", id: "about", label: "About me" },
   { href: "#contact", id: "contact", label: "Contact" },
 ];
 
-export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+export default function Sidebar() {
   const [activeSection, setActiveSection] = useState("home");
 
+  // Highlight the section that's under the upper part of the viewport.
   useEffect(() => {
     const sections = navLinks
       .map(({ id }) => document.getElementById(id))
@@ -59,6 +61,7 @@ export default function Navbar() {
     };
   }, []);
 
+  // Scroll to the hash on load and on hash changes (old /about style URLs redirect to #about).
   useEffect(() => {
     const previousScrollRestoration = window.history.scrollRestoration;
     window.history.scrollRestoration = "manual";
@@ -87,65 +90,48 @@ export default function Navbar() {
     };
   }, []);
 
-  useEffect(() => {
-    if (!isMenuOpen) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setIsMenuOpen(false);
-    };
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [isMenuOpen]);
-
   return (
-    <header className="site-nav">
-      <div className="site-nav__inner">
-        <a href="#home" className="site-nav__brand" aria-label="Ransu portfolio home">
-          ransu.dev
-        </a>
-
-        <nav className="site-nav__links" aria-label="Primary navigation">
+    <div className="sidebar">
+      <nav className="sidenav" aria-label="Primary navigation">
+        <p className="sidenav__heading" aria-hidden="true">~ navigate ~</p>
+        <ul className="sidenav__list">
           {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="site-nav__link"
-              aria-current={activeSection === link.id ? "location" : undefined}
-            >
-              {link.label}
-            </a>
+            <li key={link.href}>
+              <a
+                href={link.href}
+                className="sidenav__link"
+                aria-current={activeSection === link.id ? "location" : undefined}
+              >
+                <span className="sidenav__arrow" aria-hidden="true">►</span>
+                {link.label}
+              </a>
+            </li>
           ))}
-        </nav>
-
-        <button
-          type="button"
-          className="site-nav__toggle"
-          onClick={() => setIsMenuOpen((value) => !value)}
-          aria-expanded={isMenuOpen}
-          aria-controls="mobile-navigation"
-          aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
-        >
-          {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-        </button>
-      </div>
-
-      <nav
-        id="mobile-navigation"
-        className="mobile-nav"
-        aria-label="Mobile navigation"
-        hidden={!isMenuOpen}
-      >
-        {navLinks.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className="mobile-nav__link"
-            onClick={() => setIsMenuOpen(false)}
-            aria-current={activeSection === link.id ? "location" : undefined}
-          >
-            {link.label}
-          </a>
-        ))}
+        </ul>
       </nav>
-    </header>
+
+      <aside className="sidebar__extras" aria-label="Site extras">
+        <RetroWindow title="status.txt" icon="♪">
+          <dl className="status">
+            <div>
+              <dt>mood:</dt>
+              <dd>shipping</dd>
+            </div>
+            <div>
+              <dt>building:</dt>
+              <dd>Project L</dd>
+            </div>
+            <div>
+              <dt>open to:</dt>
+              <dd>internships &amp; collabs</dd>
+            </div>
+          </dl>
+        </RetroWindow>
+
+        <HitCounter />
+        <BlinkieStack />
+        <ButtonWall />
+      </aside>
+    </div>
   );
 }
