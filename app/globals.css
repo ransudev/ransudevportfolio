@@ -32,10 +32,10 @@ body {
   font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: 1.5;
-  /* Tiled star wallpaper in the brand colours (#60241E / #95271D / #B34A44 / #E77B49). */
-  background-color: var(--color-tile-bg);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' shape-rendering='crispEdges'%3E%3Crect width='64' height='64' fill='%2360241E'/%3E%3Cpath fill='%2395271D' d='M15 6h2v6h-2zM10 11h12v2H10zM15 13h2v6h-2zM13 9h6v6h-6z'/%3E%3Cpath fill='%23E77B49' d='M15 11h2v2h-2z'/%3E%3Cpath fill='%23B34A44' d='M46 38h2v2h-2zM50 42h2v2h-2zM42 42h2v2h-2zM46 46h2v2h-2z'/%3E%3Cpath fill='%23E77B49' d='M46 42h2v2h-2z'/%3E%3Cpath fill='%2395271D' d='M38 14h2v2h-2zM6 50h2v2H6zM58 4h2v2h-2zM28 56h2v2h-2z'/%3E%3C/svg%3E");
-  background-size: 64px 64px;
+  /* The banner's red night sky running down the page (page-sky.gif from scripts/make-retro-assets.py).
+   * Pinned to the bottom of the window, so the oxblood glow sits at the bottom and the stars above;
+   * taller windows fill the top with plain night. */
+  background: var(--color-tile-bg) url("/retro/page-sky.gif") center bottom / 128px 900px repeat-x fixed;
 }
 
 ::selection {
@@ -1501,6 +1501,10 @@ a.b88:hover {
 
   .trail {
     display: none;
+  }
+
+  body {
+    background-image: url("/retro/page-sky.png");
   }
 
   .banner {

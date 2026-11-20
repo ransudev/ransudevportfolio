@@ -667,6 +667,37 @@ def divider_beads() -> list[Image.Image]:
     return [img]
 
 
+def page_sky() -> list[Image.Image]:
+    """The page background: the banner's red night sky, stretched down a whole screen.
+    It repeats sideways and is pinned to the bottom of the window, so the oxblood glow always sits
+    at the bottom of the screen and the starry night fills the top. Stars twinkle over 3 frames."""
+    w, h = 128, 900
+    base = blank(w, h)
+    dither_vertical(base, (0, 0, w, 400), NIGHT, DUSK)
+    dither_vertical(base, (0, 400, w, 680), DUSK, DEEP)
+    dither_vertical(base, (0, 680, w, 820), DEEP, PRIMARY)
+    dither_vertical(base, (0, 820, w, h), PRIMARY, MID)
+    rnd = random.Random(1999)
+    stars = [(rnd.randrange(w), rnd.randrange(0, 620), rnd.choice([WHITE, WHITE, CREAM, YELLOW, GOLD, AMBER]), rnd.randrange(3))
+             for _ in range(110)]
+    big = [(18, 40), (90, 130), (52, 260), (110, 380), (30, 470), (76, 560)]
+    frames = []
+    for f in range(3):
+        img = base.copy()
+        px = img.load()
+        for x, y, col, phase in stars:
+            if phase != f:
+                px[x, y] = col
+        for i, (x, y) in enumerate(big):
+            col = WHITE if (i + f) % 3 else GOLD
+            px[x, y] = col
+            if (i + f) % 2 == 0:
+                for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+                    px[(x + dx) % w, y + dy] = col
+        frames.append(img)
+    return frames
+
+
 def main() -> None:
     print(f"Writing to {OUT}")
     save("88-ransu.gif", b88_ransu(), duration=180)
@@ -699,6 +730,7 @@ def main() -> None:
     save("divider-stars.gif", divider_stars(), transparent=True)
     save("divider-beads.gif", divider_beads(), transparent=True)
 
+    save("page-sky.gif", page_sky(), duration=[650, 500, 600])
     save("banner-sky.gif", banner_sky(), duration=[700, 500, 600])
     save("banner-roofs.gif", banner_roofs(), transparent=True)
     save("banner-moon.gif", banner_moon(), transparent=True)
