@@ -660,22 +660,36 @@ def divider_beads() -> list[Image.Image]:
     return [img]
 
 
-def wallpaper() -> list[Image.Image]:
-    rnd = random.Random(1999)
-    img = blank(64, 64, DEEP)
-    px = img.load()
-    # Rough dither: scattered lighter pixels, denser in a diagonal band.
-    for y in range(64):
-        for x in range(64):
-            band = abs(((x + y) % 64) - 32) / 32
-            if rnd.random() < 0.10 + 0.12 * (1 - band) and (x + y) % 2 == 0:
-                px[x, y] = PRIMARY
-    d = ImageDraw.Draw(img)
-    for cx, cy, r, col in [(14, 14, 5, MID), (46, 44, 4, TERRA), (50, 10, 2, AMBER), (20, 52, 2, ORANGE)]:
-        d.polygon(star_points(cx, cy, r, max(1, r // 2), rnd.randrange(0, 72)), fill=col)
-    for x, y in [(34, 22), (6, 36), (58, 60), (30, 6), (40, 56)]:
-        px[x, y] = GOLD
-    return [img]
+def night_tile() -> list[Image.Image]:
+    """The page wallpaper: a tileable night sky to match the banner, with stars twinkling over 3 frames."""
+    w = h = 128
+    rnd = random.Random(2001)
+    base = blank(w, h, NIGHT)
+    px = base.load()
+    # A faint, uneven dither of dusk so the sky isn't a flat fill.
+    for y in range(h):
+        for x in range(w):
+            haze = 0.5 + 0.5 * math.sin((x + y * 0.6) / 128 * math.tau)
+            if (x + y) % 2 == 0 and rnd.random() < 0.05 + 0.10 * haze:
+                px[x, y] = DUSK
+    stars = [(rnd.randrange(w), rnd.randrange(h), rnd.choice([WHITE, WHITE, WHITE, YELLOW, GOLD, SKY, PINK]), rnd.randrange(3))
+             for _ in range(38)]
+    big = [(20, 30), (90, 12), (64, 84), (112, 104), (34, 112)]
+    frames = []
+    for f in range(3):
+        img = base.copy()
+        fpx = img.load()
+        for x, y, col, phase in stars:
+            if phase != f:
+                fpx[x, y] = col
+        for i, (x, y) in enumerate(big):
+            col = WHITE if (i + f) % 3 else GOLD
+            fpx[x, y] = col
+            if (i + f) % 2 == 0:
+                for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+                    fpx[(x + dx) % w, (y + dy) % h] = col
+        frames.append(img)
+    return frames
 
 
 def main() -> None:
@@ -709,7 +723,7 @@ def main() -> None:
     save("divider-paws.gif", divider_paws(), transparent=True)
     save("divider-stars.gif", divider_stars(), transparent=True)
     save("divider-beads.gif", divider_beads(), transparent=True)
-    save("tile.gif", wallpaper())
+    save("night-tile.gif", night_tile(), duration=[650, 500, 600])
 
     save("banner-sky.gif", banner_sky(), duration=[700, 500, 600])
     save("banner-roofs.gif", banner_roofs(), transparent=True)
