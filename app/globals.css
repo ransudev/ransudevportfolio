@@ -75,7 +75,7 @@ img {
 .section-title :focus-visible,
 .site-footer :focus-visible,
 .marquee :focus-visible {
-  outline-color: var(--color-gold);
+  outline-color: var(--color-retro-amber);
 }
 
 .skip-link {
@@ -187,7 +187,7 @@ img {
   background: var(--color-screen);
   box-shadow: var(--bevel-in);
   padding: 6px 4px;
-  color: var(--color-gold);
+  color: var(--color-retro-amber);
   font-family: var(--font-terminal);
   font-size: var(--text-md);
   line-height: 1.2;
@@ -302,11 +302,11 @@ img {
 
 .sidenav__link[aria-current="location"] {
   background: var(--color-brand-deep);
-  color: var(--color-gold);
+  color: var(--color-retro-amber);
 }
 
 .sidenav__link[aria-current="location"] .sidenav__arrow {
-  color: var(--color-gold);
+  color: var(--color-retro-amber);
   animation: blink 1s steps(2, jump-none) infinite;
 }
 
@@ -325,7 +325,7 @@ img {
   gap: var(--space-xs);
   min-height: 1.75rem;
   padding: 2px 4px 2px 6px;
-  background: linear-gradient(90deg, var(--color-brand-deep), var(--color-brand-mid));
+  background: linear-gradient(90deg, var(--color-brand-deep), var(--color-retro-crimson));
   color: var(--color-bevel-light);
   font-family: var(--font-display);
   font-size: var(--text-sm);
@@ -343,7 +343,7 @@ img {
 }
 
 .window__icon {
-  color: var(--color-gold);
+  color: var(--color-retro-amber);
 }
 
 .window__controls {
@@ -510,13 +510,13 @@ img {
   max-width: 22rem;
   margin-block: var(--space-md) var(--space-xs);
   border: 2px solid var(--color-ink);
-  background: var(--color-pop-yellow);
+  background: var(--color-retro-amber);
 }
 
 .construction__stripes {
   flex: 1;
   min-width: 1.5rem;
-  background: repeating-linear-gradient(-45deg, var(--color-ink) 0 6px, var(--color-pop-yellow) 6px 12px);
+  background: repeating-linear-gradient(-45deg, var(--color-ink) 0 6px, var(--color-retro-amber) 6px 12px);
 }
 
 .construction__text {
@@ -564,7 +564,7 @@ img {
 .lanyard__strap span {
   writing-mode: vertical-rl;
   padding-block-end: var(--space-sm);
-  color: var(--color-gold);
+  color: var(--color-retro-amber);
   font-family: var(--font-terminal);
   font-size: var(--text-base);
   letter-spacing: 0.15em;
@@ -631,7 +631,7 @@ img {
   align-items: center;
   justify-content: space-between;
   padding: 1px var(--space-xs);
-  background: linear-gradient(90deg, var(--color-brand-deep), var(--color-brand-mid));
+  background: linear-gradient(90deg, var(--color-brand-deep), var(--color-retro-crimson));
   color: var(--color-bevel-light);
   font-family: var(--font-terminal);
   font-size: var(--text-base);
@@ -867,7 +867,7 @@ a.project__frame:hover {
 .project__new {
   padding: 1px 6px;
   background: var(--color-brand-primary);
-  color: var(--color-gold);
+  color: var(--color-retro-amber);
   font-family: var(--font-terminal);
   font-size: var(--text-base);
   animation: new-blink 0.9s steps(2, jump-none) infinite;
@@ -875,7 +875,7 @@ a.project__frame:hover {
 
 @keyframes new-blink {
   50% {
-    background: var(--color-gold);
+    background: var(--color-retro-amber);
     color: var(--color-brand-primary);
   }
 }
@@ -1152,7 +1152,7 @@ a.project__frame:hover {
 
 .blinkie--oxblood {
   --blink-a: var(--color-brand-deep);
-  --blink-b: var(--color-gold);
+  --blink-b: var(--color-retro-amber);
 }
 
 .blinkie--terracotta {
@@ -1161,8 +1161,8 @@ a.project__frame:hover {
 }
 
 .blinkie--gold {
-  --blink-a: var(--color-gold);
-  --blink-b: var(--color-brand-deep);
+  --blink-a: var(--color-retro-red);
+  --blink-b: var(--color-retro-amber);
 }
 
 @keyframes blinkie {
@@ -1216,7 +1216,7 @@ a.b88:hover {
 .b88--oxblood {
   --b88-bg: var(--color-brand-deep);
   --b88-ink: var(--color-paper);
-  --b88-accent: var(--color-gold);
+  --b88-accent: var(--color-retro-amber);
 }
 
 .b88--terracotta {
@@ -1230,8 +1230,8 @@ a.b88:hover {
 }
 
 .b88--gold {
-  --b88-bg: var(--color-gold);
-  --b88-ink: var(--color-brand-deep);
+  --b88-bg: var(--color-retro-red);
+  --b88-ink: var(--color-bevel-light);
 }
 
 .b88--blue {
@@ -1264,7 +1264,7 @@ a.b88:hover {
     var(--color-brand-primary),
     var(--color-brand-mid),
     var(--color-retro-orange),
-    var(--color-gold),
+    var(--color-retro-amber),
     var(--color-retro-orange),
     var(--color-brand-mid),
     var(--color-brand-primary),
@@ -1282,11 +1282,11 @@ a.b88:hover {
   min-height: 44px;
   line-height: 44px;
   padding-inline: 4px;
-  color: var(--color-gold);
+  color: var(--color-retro-amber);
 }
 
 .site-footer a:hover {
-  background: var(--color-gold);
+  background: var(--color-retro-amber);
   color: var(--color-ink);
 }
 
@@ -1309,7 +1309,7 @@ a.b88:hover {
   top: 0;
   left: 0;
   opacity: 0;
-  color: var(--color-gold);
+  color: var(--color-retro-amber);
   font-size: 14px;
   line-height: 1;
   text-shadow: 1px 1px 0 var(--color-brand-deep);

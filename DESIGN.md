@@ -22,7 +22,7 @@ One page, in this order: Banner → Marquee → (Sidebar | Welcome → Projects 
 - **Welcome** (`welcome.html` window): greeting, CTAs ("See my projects", "Get in touch"), an under-construction sign, and the lanyard ID badge.
 - **Projects:** one window per project, titled `name.exe`, with an address bar, a sunken screenshot frame, and a NEW! tag on the featured project. The featured project's screenshot spans the full width; the rest sit media-left, text-right. Projects without a screenshot get a scanlined poster in their tone colour with a file icon.
 - **Skills** (`C:\RANSU\TOOLS`), **About** (`about_me.txt`), **Contact** (`new_message.eml`): windows holding lists and beveled tables.
-- Section titles are `<h2>`s in gold Pixelify Sans with ✦ ornaments, sitting directly on the wallpaper.
+- Section titles are `<h2>`s in WordArt Pixelify Sans with ✦ ornaments, sitting directly on the wallpaper.
 
 ## Theme
 
@@ -34,11 +34,9 @@ Around them:
 
 - **Wallpaper:** a 64px pixel-star tile in the brand colours (an inline SVG data URI in `globals.css`).
 - **Panels:** cream paper (`--color-paper`) with two-tone Win9x bevels (`--bevel-out`, `--bevel-in`).
-- **Title bars:** a gradient from brand-deep to brand-mid, with light text. Don't run it to terracotta, because white text on it fails contrast.
-- **Accents:** flat web-safe retro colours, not the brand terracotta, which reads as too dusty and modern for decorations. These are `--color-retro-orange` `#FF6600`, `--color-retro-amber` `#FF9900`, `--color-gold` `#FFCC00` and `--color-retro-yellow` `#FFFF66`. Terminal green (`--color-screen-text`) is only for the counter digits.
-- **WordArt titles:** the banner and section titles use `--wordart-fill`, a yellow-to-orange gradient clipped to the text, with a 1px ink stroke and a stacked red-then-black `drop-shadow` extrusion.
-- **Links:** brand-primary, underlined; visited links go to brand-deep, and hover fills them with terracotta.
-- No rounded corners, soft shadows, glass or gradients-as-decoration beyond title bars and the footer rule.
+- **Accents:** orange and red only. They're flat web-safe colours rather than the brand terracotta, which reads as too dusty and modern for decorations: `--color-retro-amber` `#FF9900`, `--color-retro-orange` `#FF6600`, `--color-retro-red` `#FF3300` and `--color-retro-crimson` `#CC0000`. Don't add yellow. The one exception is the DeskPeek poster tone, which comes from the project data. Terminal green (`--color-screen-text`) is only for the counter digits.
+- **Title bars:** a gradient from brand-deep to crimson. The badge header uses the same gradient.
+- **WordArt titles:** the banner and section titles use `--wordart-fill`, which runs from amber at the top down to crimson. It's clipped to the text, with a 1px ink stroke and a stacked red-then-black `drop-shadow` extrusion.
 
 ## Typography
 
@@ -57,7 +55,7 @@ Around them:
 ## Microinteractions
 
 - Buttons press in: the bevel inverts on `:active`.
-- Focus rings are a 3px dotted outline, red on paper and gold on dark backgrounds.
+- Focus rings are a 3px dotted outline, red on paper and amber on dark backgrounds.
 - Touch targets are at least 44px for buttons, nav links and footer links. The 88x31 buttons are 31px tall by definition, so they only ever duplicate links that exist elsewhere.
 
 ## Decorations

@@ -20,19 +20,19 @@
   --color-bevel-dark: oklch(0.3 0.05 28.24);
   --color-screen: oklch(0.16 0.03 28.24);
   --color-screen-text: oklch(0.85 0.17 135);
-  /* Retro accents: flat, fully saturated web-safe colours, the way 90s pages did orange.
+  /* Retro accents: flat, fully saturated web-safe oranges and reds, the way 90s pages did colour.
    * The brand terracotta is too dusty and modern for decorations, so they use these instead. */
-  --color-retro-orange: #ff6600;
   --color-retro-amber: #ff9900;
-  --color-gold: #ffcc00;
-  --color-retro-yellow: #ffff66;
-  /* WordArt fill for the banner and section titles. */
+  --color-retro-orange: #ff6600;
+  --color-retro-red: #ff3300;
+  --color-retro-crimson: #cc0000;
+  /* WordArt fill for the banner and section titles: amber at the top, burning down to red. */
   --wordart-fill: linear-gradient(
     180deg,
-    var(--color-retro-yellow) 0%,
-    var(--color-gold) 35%,
-    var(--color-retro-amber) 60%,
-    var(--color-retro-orange) 100%
+    var(--color-retro-amber) 0%,
+    var(--color-retro-orange) 40%,
+    var(--color-retro-red) 70%,
+    var(--color-retro-crimson) 100%
   );
 
   /* Links: terracotta is too light on cream for body text, so links use the primary red. */
