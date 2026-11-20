@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import RetroWindow from "../../components/retro/RetroWindow";
+import Section from "../../components/retro/Section";
+import { RetroImg } from "../../components/retro/Badges";
 import { contactInfo, socialLinks } from "../../data/socials";
 
 type CopyTarget = "email" | "discord";
@@ -31,62 +32,62 @@ export default function ContactPage() {
   };
 
   return (
-    <section id="contact" className="scroll-section section" aria-labelledby="contact-title">
-      <h2 id="contact-title" className="section-title">
-        <span aria-hidden="true">✦ </span>Contact<span aria-hidden="true"> ✦</span>
-      </h2>
-
-      <RetroWindow title="new_message.eml" icon="✉">
-        <div className="contact">
-          <p className="contact__pitch">Got something to ship? E-mail me!!</p>
-          <span className="contact__mail" aria-hidden="true">✉</span>
-          <a href={`mailto:${contactInfo.email}`} className="contact__email">
+    <Section id="contact" title="Contact" divider="flame">
+      <div className="contact">
+        <p className="contact__pitch">
+          <RetroImg src="/retro/mail.gif" width={34} height={24} /> Got something to ship? E-mail me!!{" "}
+          <RetroImg src="/retro/mail.gif" width={34} height={24} />
+        </p>
+        <p className="contact__email">
+          <a href={`mailto:${contactInfo.email}`}>
             {emailUser}@<wbr />{emailDomain}
           </a>
-          <div className="contact__actions">
-            <a href={`mailto:${contactInfo.email}`} className="btn btn--primary">
-              ✉ Send an email
-            </a>
-            <button type="button" className="btn" onClick={() => copy("email", contactInfo.email)}>
-              {copied === "email" ? "✓ Copied!" : "⧉ Copy email"}
-            </button>
-          </div>
-        </div>
+        </p>
+        <p className="contact__actions">
+          <a href={`mailto:${contactInfo.email}`} className="btn">Send an email</a>
+          <button type="button" className="btn" onClick={() => copy("email", contactInfo.email)}>
+            {copied === "email" ? "Copied!" : "Copy email"}
+          </button>
+        </p>
+      </div>
 
-        <table className="facts contact__channels">
-          <caption>~ other ways to reach me ~</caption>
-          <tbody>
-            {github && (
-              <tr>
-                <th scope="row">GitHub</th>
-                <td>
-                  <a href={github.url} target="_blank" rel="noopener noreferrer">
-                    github.com/ransudev
-                  </a>
-                </td>
-              </tr>
-            )}
+      <table className="facts contact__channels">
+        <caption>~ other ways to reach me ~</caption>
+        <tbody>
+          {github && (
             <tr>
-              <th scope="row">Discord</th>
+              <th scope="row">GitHub</th>
               <td>
-                <span>@{contactInfo.discord}</span>{" "}
-                <button
-                  type="button"
-                  className="btn btn--small"
-                  aria-label={copied === "discord" ? "Discord username copied" : "Copy Discord username"}
-                  onClick={() => copy("discord", contactInfo.discord)}
-                >
-                  {copied === "discord" ? "✓ Copied" : "⧉ Copy"}
-                </button>
+                <a href={github.url} target="_blank" rel="noopener noreferrer">
+                  github.com/ransudev
+                </a>
               </td>
             </tr>
-          </tbody>
-        </table>
+          )}
+          <tr>
+            <th scope="row">Discord</th>
+            <td>
+              @{contactInfo.discord}{" "}
+              <button
+                type="button"
+                className="btn btn--small"
+                aria-label={copied === "discord" ? "Discord username copied" : "Copy Discord username"}
+                onClick={() => copy("discord", contactInfo.discord)}
+              >
+                {copied === "discord" ? "Copied!" : "Copy"}
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Guestbook</th>
+            <td>no guestbook yet, so the email up there is the guestbook ✉</td>
+          </tr>
+        </tbody>
+      </table>
 
-        <p className="sr-only" aria-live="polite">
-          {copied === "email" ? "Email address copied" : copied === "discord" ? "Discord username copied" : ""}
-        </p>
-      </RetroWindow>
-    </section>
+      <p className="sr-only" aria-live="polite">
+        {copied === "email" ? "Email address copied" : copied === "discord" ? "Discord username copied" : ""}
+      </p>
+    </Section>
   );
 }

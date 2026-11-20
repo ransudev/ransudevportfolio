@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import RetroWindow from "../retro/RetroWindow";
 import HitCounter from "../retro/HitCounter";
-import { BlinkieStack, ButtonWall } from "../retro/Badges";
+import { BlinkieStack, ButtonWall, SpinStar } from "../retro/Badges";
 
 const navLinks = [
   { href: "#home", id: "home", label: "Home" },
@@ -93,7 +92,7 @@ export default function Sidebar() {
   return (
     <div className="sidebar">
       <nav className="sidenav" aria-label="Primary navigation">
-        <p className="sidenav__heading" aria-hidden="true">~ navigate ~</p>
+        <p className="sidenav__heading" aria-hidden="true">Navigation</p>
         <ul className="sidenav__list">
           {navLinks.map((link) => (
             <li key={link.href}>
@@ -102,7 +101,6 @@ export default function Sidebar() {
                 className="sidenav__link"
                 aria-current={activeSection === link.id ? "location" : undefined}
               >
-                <span className="sidenav__arrow" aria-hidden="true">►</span>
                 {link.label}
               </a>
             </li>
@@ -111,26 +109,30 @@ export default function Sidebar() {
       </nav>
 
       <aside className="sidebar__extras" aria-label="Site extras">
-        <RetroWindow title="status.txt" icon="♪">
-          <dl className="status">
-            <div>
-              <dt>mood:</dt>
-              <dd>shipping</dd>
-            </div>
-            <div>
-              <dt>building:</dt>
-              <dd>Project L</dd>
-            </div>
-            <div>
-              <dt>open to:</dt>
-              <dd>internships &amp; collabs</dd>
-            </div>
-          </dl>
-        </RetroWindow>
+        <table className="status">
+          <caption>~ status ~</caption>
+          <tbody>
+            <tr>
+              <th scope="row">mood:</th>
+              <td>shipping</td>
+            </tr>
+            <tr>
+              <th scope="row">building:</th>
+              <td>Project L</td>
+            </tr>
+            <tr>
+              <th scope="row">open to:</th>
+              <td>internships &amp; collabs</td>
+            </tr>
+          </tbody>
+        </table>
 
         <HitCounter />
         <BlinkieStack />
         <ButtonWall />
+        <p className="sidebar__thanks">
+          <SpinStar /> thanks 4 visiting! <SpinStar />
+        </p>
       </aside>
     </div>
   );

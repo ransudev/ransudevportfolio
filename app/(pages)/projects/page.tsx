@@ -1,13 +1,12 @@
 import Image from "next/image";
+import Section from "../../components/retro/Section";
+import RetroWindow from "../../components/retro/RetroWindow";
+import { NewBadge } from "../../components/retro/Badges";
 import { projects, type Project } from "../../data/projects";
 
 function displayUrl(url: string) {
   const { host, pathname } = new URL(url);
   return `${host}${pathname === "/" ? "" : pathname}`;
-}
-
-function windowTitle(project: Project) {
-  return `${project.title.toLowerCase().replace(/\s+/g, "-")}.exe`;
 }
 
 function ProjectMedia({ project }: { project: Project }) {
@@ -17,119 +16,98 @@ function ProjectMedia({ project }: { project: Project }) {
         src={project.imageUrl}
         alt={`Screenshot of ${project.title}`}
         fill
-        sizes="(min-width: 62rem) 46rem, 100vw"
+        sizes="(min-width: 780px) 560px, 100vw"
       />
     );
   }
 
-  // No screenshot yet: a pixel "file icon" poster in the project's colour.
+  // No screenshot yet: a scanlined poster in the project's colour.
   return (
     <div className="project__poster" aria-hidden="true">
-      <span className="project__poster-icon">
-        {project.logoUrl ? (
-          <Image src={project.logoUrl} alt="" width={64} height={64} />
-        ) : (
-          <span className="project__poster-glyph">{project.title.slice(0, 1)}</span>
-        )}
-      </span>
+      {project.logoUrl ? (
+        <Image src={project.logoUrl} alt="" width={64} height={64} className="project__poster-logo" />
+      ) : (
+        <span className="project__poster-glyph">{project.title.slice(0, 1)}</span>
+      )}
       <span className="project__poster-title">{project.title}</span>
       <span className="project__poster-stack">{project.techStack.slice(0, 2).join(" / ")}</span>
     </div>
   );
 }
 
+function ProjectScreen({ project }: { project: Project }) {
+  const primaryUrl = project.liveUrl ?? project.githubUrl;
+  const frame = project.videoUrl ? (
+    <a
+      href={project.videoUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="project__frame"
+      aria-label={`Watch the ${project.title} video`}
+    >
+      <ProjectMedia project={project} />
+      <span className="project__play" aria-hidden="true">&#9658; PLAY</span>
+    </a>
+  ) : (
+    <div className="project__frame">
+      <ProjectMedia project={project} />
+    </div>
+  );
+
+  return (
+    <RetroWindow title={primaryUrl ? displayUrl(primaryUrl) : project.title} icon="e" className="project__window">
+      {frame}
+    </RetroWindow>
+  );
+}
+
 export default function ProjectsPage() {
   return (
-    <section id="projects" className="scroll-section section" aria-labelledby="projects-title">
-      <h2 id="projects-title" className="section-title">
-        <span aria-hidden="true">✦ </span>My Projects<span aria-hidden="true"> ✦</span>
-      </h2>
-      <p className="section-lede">
-        Stuff I actually built and shipped. Click around, they&apos;re real.
-      </p>
-
-      <div className="projects">
-        {projects.map((project) => {
-          const primaryUrl = project.liveUrl ?? project.githubUrl;
-          const classes = [
-            "window",
+    <Section id="projects" title="My Projects" divider="flame" lede="Stuff I actually built and shipped. Click around, they're real.">
+      {projects.map((project, index) => (
+        <article
+          key={project.id}
+          className={[
             "project",
             project.featured && "project--featured",
             project.tone && `project--${project.tone}`,
-          ].filter(Boolean).join(" ");
-
-          return (
-            <article key={project.id} className={classes} aria-labelledby={`project-${project.id}`}>
-              <div className="window__bar">
-                <span className="window__title">
-                  <span className="window__icon" aria-hidden="true">▣</span>
-                  {windowTitle(project)}
-                </span>
-                <span className="window__controls" aria-hidden="true">
-                  <span>_</span>
-                  <span>□</span>
-                  <span>×</span>
-                </span>
-              </div>
-
-              <div className="window__body project__body">
-                <div className="project__media">
-                  {primaryUrl && (
-                    <p className="project__address">
-                      <span aria-hidden="true">Address:</span> {displayUrl(primaryUrl)}
-                    </p>
-                  )}
-                  {project.videoUrl ? (
-                    <a
-                      href={project.videoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="project__frame project__frame--video"
-                      aria-label={`Watch the ${project.title} video`}
-                    >
-                      <ProjectMedia project={project} />
-                      <span className="project__play" aria-hidden="true">▶ PLAY</span>
-                    </a>
-                  ) : (
-                    <div className="project__frame">
-                      <ProjectMedia project={project} />
-                    </div>
-                  )}
-                </div>
-
-                <div className="project__content">
-                  <h3 id={`project-${project.id}`} className="project__title">
-                    {project.title}
-                    {project.featured && <span className="project__new">NEW!</span>}
-                  </h3>
-                  <p>{project.description}</p>
-                  <p className="project__stack">
-                    <span className="project__stack-label">built with:</span>{" "}
-                    {project.techStack.join(" · ")}
-                  </p>
-                  <div className="project__actions">
-                    {project.liveUrl && (
-                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn--primary">
-                        ► Live site
-                      </a>
-                    )}
-                    {project.videoUrl && (
-                      <a href={project.videoUrl} target="_blank" rel="noopener noreferrer" className="btn btn--primary">
-                        ▶ Watch video
-                      </a>
-                    )}
-                    {project.githubUrl && (
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn">
-                        {"</>"} Source
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </article>
-          );
-        })}
-      </div>
-    </section>
+          ].filter(Boolean).join(" ")}
+          aria-labelledby={`project-${project.id}`}
+        >
+          {index > 0 && <hr />}
+          <div className="project__row">
+            <div className="project__media">
+              <ProjectScreen project={project} />
+            </div>
+            <div className="project__content">
+              <h3 id={`project-${project.id}`} className="project__title">
+                {project.title} {project.featured && <NewBadge />}
+              </h3>
+              <p>{project.description}</p>
+              <p className="project__stack">
+                <b>Built with:</b> {project.techStack.join(", ")}
+              </p>
+              <p className="project__links">
+                {project.liveUrl && (
+                  <>
+                    [ <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">Live site</a> ]{" "}
+                  </>
+                )}
+                {project.videoUrl && (
+                  <>
+                    [ <a href={project.videoUrl} target="_blank" rel="noopener noreferrer">Watch video</a> ]{" "}
+                  </>
+                )}
+                {project.githubUrl && (
+                  <>
+                    [ <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">Source code</a> ]
+                  </>
+                )}
+              </p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </Section>
   );
 }

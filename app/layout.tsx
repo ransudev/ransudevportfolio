@@ -1,18 +1,7 @@
 import type { Metadata } from "next";
-import { Pixelify_Sans, VT323 } from "next/font/google";
 import "./globals.css";
 
-const pixelify = Pixelify_Sans({
-  variable: "--font-pixelify",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
-
-const vt323 = VT323({
-  variable: "--font-vt323",
-  subsets: ["latin"],
-  weight: "400",
-});
+// No web fonts: 90s pages used whatever the computer had (Times, Arial, Verdana, Comic Sans).
 
 export const metadata: Metadata = {
   title: "Ransu's Homepage — Lance, Developer",
@@ -26,8 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // Font variables sit on <html> so the :root tokens in tokens.css can resolve them.
-    <html lang="en" className={`scroll-smooth ${pixelify.variable} ${vt323.variable}`}>
+    <html lang="en">
       <body>
         <a className="skip-link" href="#main-content">
           Skip to content
