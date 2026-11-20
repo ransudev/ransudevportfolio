@@ -10,5 +10,8 @@
   "assets": {
     "directory": "./out",
     "not_found_handling": "404-page"
-  }
+  },
+  // Lets Workers Builds publish a preview for branches other than master (`wrangler preview`).
+  // Empty is enough: assets and compatibility settings above are shared with previews.
+  "previews": {}
 }
