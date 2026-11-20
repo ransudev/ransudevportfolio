@@ -46,7 +46,7 @@ Around them:
 
 ## Motion
 
-- The pixel GIFs carry most of the blinking: spinning stars, the NEW! burst, blinkies, the flapping mail icon, the flashing construction sign, the nav bullets and the flame dividers. CSS motion stays in `steps()`, never eased.
+- The pixel GIFs carry most of the blinking: spinning stars, the NEW! burst, blinkies, the flapping mail icon, the flashing construction sign, the nav bullets and the cats. CSS motion stays in `steps()`, never eased. Two tabbies walk back and forth over paw-print trails, one under the marquee and one above the footer: a CSS `left` animation that flips the sprite instantly at each end, with the second cat offset so the two are out of step. No fire anywhere.
 - **Marquee:** 45s linear loop with duplicated content.
 - **Cursor trail:** a pool of 18 recycled sparkles, on fine pointers only.
 - **Lanyard:** the one physical motion. It drops in, swings on a spring and can be dragged (swing capped at 90° each side, card tilt at 20°).
@@ -60,9 +60,10 @@ Around them:
 
 ## Decorations
 
-- **The GIFs:** `scripts/make-retro-assets.py` draws them with Pillow, pixel by pixel, using a hand-made 5x7 bitmap font. That covers the 88x31 buttons, blinkies, spinning star, NEW! burst, mail icon, under-construction sign, nav bullet and the flame/stars/beads divider tiles. It writes `public/retro/*.gif` plus a `.png` still of each first frame. Re-run it after changing anything.
+- **The GIFs:** `scripts/make-retro-assets.py` draws them with Pillow, pixel by pixel, using a hand-made 5x7 bitmap font. That covers the 88x31 buttons, blinkies, spinning star, NEW! burst, mail icon, under-construction sign, nav bullet, the cats (walking, sleeping, sitting), the I-love-cats button, the meow blinkie and the paws/stars/beads divider tiles. It writes `public/retro/*.gif` plus a `.png` still of each first frame. Re-run it after changing anything.
 - **Where they go:** list the buttons and blinkies in `app/data/badges.ts`. Render the GIFs with `RetroImg` (`app/components/retro/Badges.tsx`), which keeps them crisp at native size and serves the still `.png` to reduced-motion visitors.
-- **Dividers:** these are repeat-x GIF strips: flame under the marquee, above the footer and under the Projects and Contact titles; beads under Skills; stars under About.
+- **Dividers:** these are repeat-x GIF strips: paw prints under the Projects and Contact titles and beneath the walking cats; beads under Skills; stars under About.
+- **Cats:** components are in `app/components/retro/Cats.tsx`. `WalkingCat` handles the strolling ones, `Perch` sits a cat on a window (a napping cat on Skills, a sitting cat on Contact), and `Cat` places a single cat (the one beside the counter). They are drawn as orange tabbies to match the palette and shown at 2x. Reduced-motion visitors get still cats that stay put.
 - **Other touches:** every section ends with an "↑ back to top" link. The footer shows "last updated" (`lastUpdated` in `badges.ts`) and "best viewed at 800x600". Contact has a guestbook row that honestly says there isn't one yet.
 - **Rules:** don't hotlink third-party GIFs. Decorative GIFs have empty alt text; meaningful ones (NEW!, the 88x31 buttons, the blinkies) have real alt text.
 - **Still CSS-drawn:** the counter, the windows and the lanyard badge.

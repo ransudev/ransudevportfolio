@@ -14,7 +14,7 @@ import math
 import random
 from pathlib import Path
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFilter
 
 OUT = Path(__file__).resolve().parent.parent / "public" / "retro"
 
@@ -44,9 +44,12 @@ NAVY = (0x00, 0x00, 0x80)
 BLUE = (0x00, 0x33, 0xCC)
 SKY = (0x66, 0x99, 0xFF)
 LIME = (0x33, 0xFF, 0x33)
+PINK = (0xFF, 0x99, 0xCC)
+TABBY = (0xFF, 0x88, 0x22)
+BURNT = (0xB3, 0x47, 0x00)
 
 PALETTE = [KEY, DEEP, PRIMARY, MID, TERRA, AMBER, ORANGE, RED, CRIMSON, GOLD, YELLOW, HAZARD,
-           CREAM, TAN, GREY, DARKGREY, WHITE, BLACK, INK, NAVY, BLUE, SKY, LIME]
+           CREAM, TAN, GREY, DARKGREY, WHITE, BLACK, INK, NAVY, BLUE, SKY, LIME, PINK, TABBY, BURNT]
 
 # ---------------------------------------------------------------------------
 # 5x7 bitmap font, drawn by hand. Lowercase is drawn as uppercase.
@@ -407,25 +410,155 @@ def bullet() -> list[Image.Image]:
 
 
 # ---------------------------------------------------------------------------
-# Divider tiles (repeat-x as backgrounds) and the page wallpaper
+# Cats! Drawn as shapes on a transparent canvas, then given a 1px black outline.
 # ---------------------------------------------------------------------------
-def divider_flame() -> list[Image.Image]:
-    w, h = 32, 12
+def sprite(w: int, h: int) -> tuple[Image.Image, ImageDraw.ImageDraw]:
+    img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    return img, ImageDraw.Draw(img)
+
+
+def outlined(img: Image.Image, pad: tuple[int, int] = (1, 1), size: tuple[int, int] | None = None) -> Image.Image:
+    """Pad the sprite, wrap it in a black outline, and flatten it onto the transparent key colour."""
+    w, h = size or (img.width + pad[0] * 2, img.height + pad[1] * 2)
+    canvas = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    canvas.paste(img, pad, img)
+    mask = canvas.getchannel("A").point(lambda a: 255 if a else 0)
+    ring = mask.filter(ImageFilter.MaxFilter(3))
+    out = Image.new("RGB", (w, h), KEY)
+    out.paste(BLACK, (0, 0, w, h), ring)
+    out.paste(canvas.convert("RGB"), (0, 0), mask)
+    return out
+
+
+def walking_cat() -> list[Image.Image]:
+    """An orange tabby trotting to the right: four frames of legs, a bobbing body and a swishing tail."""
     frames = []
+    for f in range(4):
+        img, d = sprite(30, 20)
+        bob = f % 2
+        swing = [-1, 0, 1, 0][f]
+        tip = [(1, 2), (2, 1), (1, 3), (0, 2)][f]
+        d.line([(8, 10 + bob), (4, 8 + bob), (2, 5 + bob), tip], fill=TABBY, width=2)
+        for i, x in enumerate([9, 12, 18, 21]):
+            dx = swing if i % 2 == 0 else -swing
+            d.rectangle([x + dx, 13, x + dx + 1, 18], fill=TABBY)
+            d.line([x + dx, 18, x + dx + 1, 18], fill=CREAM)
+        d.ellipse([6, 7 + bob, 23, 15 + bob], fill=TABBY)
+        d.ellipse([9, 12 + bob, 20, 15 + bob], fill=CREAM)
+        for x in (10, 13, 16):
+            d.line([x, 7 + bob, x, 10 + bob], fill=BURNT)
+        d.ellipse([19, 2 + bob, 28, 11 + bob], fill=TABBY)
+        d.polygon([(20, 4 + bob), (21, 0 + bob), (23, 3 + bob)], fill=TABBY)
+        d.polygon([(24, 3 + bob), (26, 0 + bob), (27, 4 + bob)], fill=TABBY)
+        d.point([(21, 2 + bob), (26, 2 + bob)], fill=PINK)
+        d.line([22, 3 + bob, 23, 3 + bob], fill=BURNT)
+        d.ellipse([24, 7 + bob, 28, 10 + bob], fill=CREAM)
+        d.line([24, 5 + bob, 24, 6 + bob], fill=INK)
+        d.point([(28, 7 + bob)], fill=PINK)
+        frames.append(outlined(img, pad=(1, 2)))
+    return frames
+
+
+def sleeping_cat() -> list[Image.Image]:
+    """A curled-up cat breathing slowly, with Zs drifting up."""
+    frames = []
+    zs = [(30, 6), (33, 3), (36, 0)]
     for f in range(3):
-        rnd = random.Random(10 + f)
-        img = blank(w, h)
-        px = img.load()
-        for x in range(w):
-            height = 4 + int(4 * (1 + math.sin((x + f * 3) * 0.7))) // 2 + rnd.randrange(0, 3)
-            for i in range(height):
-                y = h - 1 - i
-                t = i / max(1, height - 1)
-                px[x, y] = CRIMSON if t < 0.3 else RED if t < 0.55 else ORANGE if t < 0.8 else GOLD
+        img, d = sprite(30, 18)
+        breathe = f % 2
+        d.ellipse([2, 6 - breathe, 24, 16], fill=TABBY)
+        for x in (7, 11, 15):
+            d.line([x, 7 - breathe, x + 1, 9 - breathe], fill=BURNT)
+        d.ellipse([16, 5, 27, 15], fill=TABBY)
+        d.polygon([(17, 7), (18, 2), (21, 5)], fill=TABBY)
+        d.polygon([(23, 5), (26, 2), (27, 7)], fill=TABBY)
+        d.point([(18, 4), (26, 4)], fill=PINK)
+        d.ellipse([22, 11, 27, 14], fill=CREAM)
+        d.line([20, 10, 22, 10], fill=INK)
+        d.point([(26, 12)], fill=PINK)
+        d.line([(3, 15), (10, 16), (18, 16)], fill=BURNT, width=2)
+        d.point([(18, 16), (19, 16)], fill=CREAM)
+        out = outlined(img, pad=(1, 9), size=(41, 28))
+        px = out.load()
+        for zx, zy in zs[: f + 1]:  # tiny pixel Zs
+            for x, y in [(0, 0), (1, 0), (2, 0), (3, 0), (2, 1), (1, 2), (0, 3), (1, 3), (2, 3), (3, 3)]:
+                px[zx + x, zy + y] = GOLD
+        frames.append(out)
+    return frames
+
+
+def sitting_cat() -> list[Image.Image]:
+    """A cat facing you, wagging its tail and blinking now and then."""
+    frames = []
+    tails = [(21, 15), (22, 12), (21, 9), (22, 12), (21, 15), (22, 12)]
+    for f, tip in enumerate(tails):
+        img, d = sprite(24, 26)
+        d.line([(15, 22), (19, 20), tip], fill=TABBY, width=2)
+        d.ellipse([4, 11, 17, 25], fill=TABBY)
+        d.ellipse([8, 14, 13, 24], fill=CREAM)
+        d.rectangle([6, 23, 8, 25], fill=CREAM)
+        d.rectangle([12, 23, 14, 25], fill=CREAM)
+        d.ellipse([3, 2, 18, 14], fill=TABBY)
+        d.polygon([(4, 5), (5, 0), (9, 3)], fill=TABBY)
+        d.polygon([(12, 3), (16, 0), (17, 5)], fill=TABBY)
+        d.point([(5, 2), (16, 2)], fill=PINK)
+        for x in (8, 10, 12):
+            d.line([x, 3, x, 5], fill=BURNT)
+        d.ellipse([7, 9, 13, 13], fill=CREAM)
+        if f == 4:  # blink
+            d.line([6, 8, 8, 8], fill=INK)
+            d.line([12, 8, 14, 8], fill=INK)
+        else:
+            d.rectangle([6, 7, 8, 8], fill=GOLD)
+            d.rectangle([12, 7, 14, 8], fill=GOLD)
+            d.point([(7, 7), (7, 8), (13, 7), (13, 8)], fill=INK)
+        d.point([(10, 10)], fill=PINK)
+        out = outlined(img, pad=(3, 1), size=(30, 28))
+        draw = ImageDraw.Draw(out)  # whiskers sit on top of the outline
+        draw.line([0, 11, 4, 12], fill=DARKGREY)
+        draw.line([23, 12, 27, 11], fill=DARKGREY)
+        frames.append(out)
+    return frames
+
+
+def divider_paws() -> list[Image.Image]:
+    """A trail of paw prints, alternating left and right feet."""
+    img = blank(30, 12)
+    d = ImageDraw.Draw(img)
+    for cx, cy, col in [(6, 7, MID), (21, 3, TERRA)]:
+        d.ellipse([cx - 2, cy, cx + 2, cy + 3], fill=col)
+        for tx, ty in [(cx - 3, cy - 2), (cx - 1, cy - 3), (cx + 1, cy - 3), (cx + 3, cy - 2)]:
+            d.rectangle([tx, ty, tx, ty + 1], fill=col)
+    return [img]
+
+
+def b88_cats() -> list[Image.Image]:
+    frames = []
+    for blink in (False, False, False, True):
+        img = blank(88, 31, CREAM)
+        bevel(img, WHITE, TAN)
+        d = ImageDraw.Draw(img)
+        d.ellipse([5, 8, 24, 26], fill=TABBY, outline=BLACK)
+        d.polygon([(6, 13), (7, 4), (13, 9)], fill=TABBY, outline=BLACK)
+        d.polygon([(16, 9), (22, 4), (23, 13)], fill=TABBY, outline=BLACK)
+        if blink:
+            d.line([9, 15, 11, 15], fill=INK)
+            d.line([18, 15, 20, 15], fill=INK)
+        else:
+            d.rectangle([9, 14, 11, 16], fill=GOLD)
+            d.rectangle([18, 14, 20, 16], fill=GOLD)
+            d.line([10, 14, 10, 16], fill=INK)
+            d.line([19, 14, 19, 16], fill=INK)
+        d.point([(14, 19), (15, 19)], fill=PINK)
+        draw_text(img, 32, 6, "I \u2665", CRIMSON)
+        draw_text(img, 32, 17, "CATS", BURNT)
         frames.append(img)
     return frames
 
 
+# ---------------------------------------------------------------------------
+# Divider tiles (repeat-x as backgrounds) and the page wallpaper
+# ---------------------------------------------------------------------------
 def divider_stars() -> list[Image.Image]:
     img = blank(24, 11)
     d = ImageDraw.Draw(img)
@@ -472,11 +605,13 @@ def main() -> None:
     save("88-800x600.gif", b88_800())
     save("88-cookies.gif", b88_cookies())
     save("88-html.gif", b88_html())
+    save("88-cats.gif", b88_cats(), duration=[900, 900, 900, 160])
 
     save("blinkie-ship.gif", blinkie("BREAK IT FIX IT SHIP IT", DEEP, GOLD, GOLD, DEEP, 1), duration=500)
     save("blinkie-windows.gif", blinkie("♥ I ♥ WINDOWS APIS ♥", ORANGE, INK, INK, ORANGE, 2), duration=450)
     save("blinkie-coffee.gif", blinkie("POWERED BY COFFEE", RED, YELLOW, CRIMSON, AMBER, 3), duration=550)
     save("blinkie-work.gif", blinkie("★ OPEN TO WORK ★", INK, LIME, DEEP, GOLD, 4), duration=500)
+    save("blinkie-meow.gif", blinkie("♥ MEOW MEOW MEOW ♥", PINK, INK, INK, PINK, 5), duration=450)
 
     save("construction.gif", construction(), duration=160)
     save("star.gif", spin_star(), duration=110, transparent=True)
@@ -484,7 +619,11 @@ def main() -> None:
     save("mail.gif", mail(), duration=300, transparent=True)
     save("bullet.gif", bullet(), duration=500, transparent=True)
 
-    save("divider-flame.gif", divider_flame(), duration=140, transparent=True)
+    save("cat-walk.gif", walking_cat(), duration=120, transparent=True)
+    save("cat-sleep.gif", sleeping_cat(), duration=700, transparent=True)
+    save("cat-sit.gif", sitting_cat(), duration=[260, 260, 260, 260, 180, 260], transparent=True)
+
+    save("divider-paws.gif", divider_paws(), transparent=True)
     save("divider-stars.gif", divider_stars(), transparent=True)
     save("divider-beads.gif", divider_beads(), transparent=True)
     save("tile.gif", wallpaper())

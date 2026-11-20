@@ -16,6 +16,7 @@ export const buttons88: Button88[] = [
   { src: "/retro/88-800x600.gif", alt: "Best viewed at 800x600" },
   { src: "/retro/88-cookies.gif", alt: "No cookies" },
   { src: "/retro/88-html.gif", alt: "HTML is art" },
+  { src: "/retro/88-cats.gif", alt: "I love cats" },
 ];
 
 export interface Blinkie {
@@ -28,6 +29,7 @@ export const blinkies: Blinkie[] = [
   { src: "/retro/blinkie-windows.gif", alt: "I love Windows APIs" },
   { src: "/retro/blinkie-coffee.gif", alt: "Powered by coffee" },
   { src: "/retro/blinkie-work.gif", alt: "Open to work" },
+  { src: "/retro/blinkie-meow.gif", alt: "Meow meow meow" },
 ];
 
 export const newsItems = [

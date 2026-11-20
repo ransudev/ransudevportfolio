@@ -1143,9 +1143,9 @@ a.b88:hover {
   image-rendering: pixelated;
 }
 
-.divider--flame {
+.divider--paws {
   height: 12px;
-  background-image: url("/retro/divider-flame.gif");
+  background-image: url("/retro/divider-paws.gif");
 }
 
 .divider--stars {
@@ -1158,6 +1158,82 @@ a.b88:hover {
   width: 50%;
   height: 8px;
   background-image: url("/retro/divider-beads.gif");
+}
+
+/* ---------- Cats ---------- */
+
+/* A tabby trotting back and forth over a trail of paw prints. */
+.catwalk {
+  position: relative;
+  height: 52px;
+  margin-block: 2px var(--space-xs);
+  overflow: hidden;
+}
+
+.catwalk .divider {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+}
+
+.catwalk__cat {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  animation: catwalk 28s linear infinite;
+}
+
+/* Walk right, turn around, walk back. Turning is an instant flip, like a sprite would. */
+@keyframes catwalk {
+  0% {
+    left: 0;
+    transform: scaleX(1);
+  }
+  49.99% {
+    left: calc(100% - 64px);
+    transform: scaleX(1);
+  }
+  50% {
+    left: calc(100% - 64px);
+    transform: scaleX(-1);
+  }
+  99.99% {
+    left: 0;
+    transform: scaleX(-1);
+  }
+  100% {
+    left: 0;
+    transform: scaleX(1);
+  }
+}
+
+.site-footer .catwalk {
+  margin-bottom: var(--space-md);
+}
+
+.sidebar__cat {
+  justify-self: center;
+}
+
+/* A cat sitting on top of a window's title bar. */
+.perch {
+  position: relative;
+}
+
+.perch__cat {
+  position: absolute;
+  bottom: calc(100% - 4px);
+  z-index: 2;
+  line-height: 0;
+  pointer-events: none;
+}
+
+.perch__cat--right {
+  right: 28px;
+}
+
+.perch__cat--left {
+  left: 28px;
 }
 
 .back-to-top {
@@ -1389,9 +1465,5 @@ a.b88:hover {
 
   .trail {
     display: none;
-  }
-
-  .divider--flame {
-    background-image: url("/retro/divider-flame.png");
   }
 }

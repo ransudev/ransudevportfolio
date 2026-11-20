@@ -2,7 +2,8 @@ import Sidebar from "./components/sections/Sidebar";
 import Footer from "./components/sections/Footer";
 import Marquee from "./components/retro/Marquee";
 import CursorTrail from "./components/retro/CursorTrail";
-import { Divider, SpinStar } from "./components/retro/Badges";
+import { SpinStar } from "./components/retro/Badges";
+import { WalkingCat } from "./components/retro/Cats";
 import { newsItems } from "./data/badges";
 import HomePage from "./(pages)/home/page";
 import AboutPage from "./(pages)/about/page";
@@ -23,7 +24,7 @@ export default function RootPage() {
       </header>
 
       <Marquee items={newsItems} label="Site news" />
-      <Divider kind="flame" />
+      <WalkingCat />
 
       <div className="layout">
         <Sidebar />

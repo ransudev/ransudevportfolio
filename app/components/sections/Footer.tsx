@@ -1,13 +1,13 @@
 import { socialLinks } from "../../data/socials";
 import { lastUpdated } from "../../data/badges";
-import { Divider } from "../retro/Badges";
+import { WalkingCat } from "../retro/Cats";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="site-footer">
-      <Divider kind="flame" />
+      <WalkingCat offset={11} />
       <p className="site-footer__links">
         [{" "}
         {socialLinks.map((social, index) => (

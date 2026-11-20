@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import RetroWindow from "../retro/RetroWindow";
 import HitCounter from "../retro/HitCounter";
+import { Cat } from "../retro/Cats";
 import { BlinkieStack, ButtonWall, RetroImg, SpinStar } from "../retro/Badges";
 
 const navLinks = [
@@ -129,6 +130,7 @@ export default function Sidebar() {
         </RetroWindow>
 
         <HitCounter />
+        <Cat pose="sit" className="sidebar__cat" />
         <BlinkieStack />
         <ButtonWall />
         <p className="sidebar__thanks">

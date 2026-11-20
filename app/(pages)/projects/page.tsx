@@ -45,7 +45,7 @@ export default function ProjectsPage() {
       <h2 id="projects-title" className="section-title">
         <span aria-hidden="true">✦ </span>My Projects<span aria-hidden="true"> ✦</span>
       </h2>
-      <Divider kind="flame" />
+      <Divider kind="paws" />
       <p className="section-lede">
         Stuff I actually built and shipped. Click around, they&apos;re real.
       </p>

@@ -69,7 +69,7 @@ export function NewBadge() {
   return <RetroImg src="/retro/new.gif" width={36} height={17} alt="New!" className="new-badge" />;
 }
 
-export type DividerKind = "flame" | "stars" | "beads";
+export type DividerKind = "paws" | "stars" | "beads";
 
 // A repeat-x strip of a small GIF tile, like the image <hr>s of old.
 export function Divider({ kind = "stars" }: { kind?: DividerKind }) {
