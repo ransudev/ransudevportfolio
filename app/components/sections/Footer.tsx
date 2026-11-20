@@ -1,13 +1,11 @@
 import { socialLinks } from "../../data/socials";
-import { lastUpdated } from "../../data/badges";
-import { Divider } from "../retro/Badges";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="site-footer">
-      <Divider kind="beads" />
+      <hr className="rainbow-rule" />
       <p className="site-footer__links">
         [{" "}
         {socialLinks.map((social, index) => (
@@ -23,12 +21,12 @@ export default function Footer() {
           </span>
         ))}
         {" | "}
-        <a href="#home">Back to top</a>{" "}
+        <a href="#home">Back to top ▲</a>{" "}
         ]
       </p>
-      <p>last updated: {lastUpdated}</p>
-      <p>this page is best viewed at 800x600 in any browser, honestly</p>
-      <p className="site-footer__meta">© {currentYear} ransudev · made by hand (ish) · no frames were harmed</p>
+      <p className="site-footer__meta">
+        © {currentYear} ransudev · made by hand (ish) · best viewed in any browser, honestly
+      </p>
     </footer>
   );
 }

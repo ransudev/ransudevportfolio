@@ -1,5 +1,5 @@
-/* Ransu portfolio · system: 90s personal homepage · strategy: table layout, oxblood tile, cream panels, pixel GIFs
- * voice: blunt · warm · a little goofy · imagery: hand-made pixel GIFs (scripts/make-retro-assets.py)
+/* Ransu portfolio · system: 90s personal homepage · strategy: oxblood tile + cream panels
+ * voice: blunt · warm · a little goofy · imagery: hand-made pixel decorations
  */
 
 :root {
@@ -49,12 +49,9 @@
   --color-pop-yellow: oklch(0.84 0.16 86);
   --color-pop-pink: oklch(0.76 0.12 8);
 
-  /* System fonts only, like a 1999 PC. */
-  --font-wordart: "Arial Black", Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  --font-body: "Times New Roman", Times, serif;
-  --font-small: Verdana, Geneva, Tahoma, Arial, sans-serif;
-  --font-comic: "Comic Sans MS", "Comic Neue", "Chalkboard SE", cursive;
-  --font-mono: "Courier New", Courier, monospace;
+  --font-display: var(--font-pixelify), "Courier New", monospace;
+  --font-terminal: var(--font-vt323), "Courier New", monospace;
+  --font-body: "Times New Roman", Times, Georgia, serif;
 
   --space-3xs: 0.125rem;
   --space-2xs: 0.25rem;
@@ -72,20 +69,14 @@
   --text-xl: 2rem;
   --text-2xl: clamp(2rem, 6vw, 3.25rem);
 
-  /* Table-era extras */
-  --color-tan: #e6d3b3;
-  --color-btn: #c0c0c0;
-  --color-btn-dark: #808080;
-  --color-led: #ff2200;
-
   /* Win9x-style bevels: two-tone borders drawn with inset shadows. */
   --bevel-out: inset -2px -2px 0 var(--color-bevel-dark), inset 2px 2px 0 var(--color-bevel-light),
     inset -4px -4px 0 var(--color-bevel-mid);
   --bevel-in: inset 2px 2px 0 var(--color-bevel-dark), inset -2px -2px 0 var(--color-bevel-light),
     inset 4px 4px 0 var(--color-bevel-mid);
 
-  --page-max: 780px;
-  --sidebar-width: 172px;
+  --page-max: 62rem;
+  --sidebar-width: 13.5rem;
   --page-gutter: 1rem;
 
   --z-trail: 900;
