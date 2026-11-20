@@ -26,7 +26,6 @@ export default function RootPage() {
           <a href="#home">Ransu.dev</a>
         </h1>
         <p className="banner__stars" aria-hidden="true">彡<SpinStar /></p>
-        <p className="banner__tagline">Break it. Fix it. Ship it.</p>
       </header>
 
       <Marquee items={newsItems} label="Site news" />

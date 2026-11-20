@@ -200,16 +200,6 @@ img {
   line-height: 1;
 }
 
-.banner__tagline {
-  grid-column: 1 / -1;
-  margin: var(--space-sm) 0 0;
-  color: var(--color-paper);
-  font-family: var(--font-terminal);
-  font-size: var(--text-lg);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 /* ---------- Marquee ---------- */
 
 .marquee {
@@ -1383,10 +1373,6 @@ a.b88:hover {
   .banner__moon .px img {
     width: 26px;
     height: 26px;
-  }
-
-  .banner__tagline {
-    font-size: var(--text-md);
   }
 
   .layout {
