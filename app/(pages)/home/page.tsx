@@ -18,17 +18,17 @@ export default function HomePage() {
             <p>
               Grab my ID badge and give it a swing, or skip straight to the good stuff:
             </p>
-            <div className="welcome__actions">
-              <a href="#projects" className="btn btn--primary">
-                ► See my projects
-              </a>
-              <a href="#contact" className="btn">
-                ✉ Get in touch
-              </a>
-            </div>
-            <p className="welcome__construction">
+            <div className="welcome__cta">
+              <div className="welcome__actions">
+                <a href="#projects" className="btn btn--primary">
+                  ► See my projects
+                </a>
+                <a href="#contact" className="btn">
+                  ✉ Get in touch
+                </a>
+              </div>
               <UnderConstruction />
-            </p>
+            </div>
             <p className="welcome__note">
               this site is always under construction. so am i.
             </p>

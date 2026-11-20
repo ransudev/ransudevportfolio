@@ -58,7 +58,7 @@ export function BlinkieStack() {
 }
 
 export function UnderConstruction() {
-  return <RetroImg src="/retro/construction.gif" width={136} height={32} alt="Under construction" className="construction" />;
+  return <RetroImg src="/retro/construction.gif" width={360} height={44} alt="Under construction" className="construction" />;
 }
 
 export function SpinStar({ className }: { className?: string }) {

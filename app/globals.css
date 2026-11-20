@@ -512,21 +512,36 @@ img {
   margin: 0 0 var(--space-sm);
 }
 
-.welcome__actions {
-  display: flex;
-  flex-wrap: wrap;
+/* The two buttons and the under-construction sign share one column, so the sign spans both buttons. */
+.welcome__cta {
+  width: min(100%, 360px);
+  display: grid;
   gap: var(--space-sm);
-  margin-block: var(--space-md);
+  margin-block: var(--space-md) var(--space-xs);
+}
+
+.welcome__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.welcome__actions .btn {
+  padding-inline: var(--space-xs);
+  white-space: nowrap;
+}
+
+.welcome__cta .construction,
+.welcome__cta .construction img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .welcome__note {
   color: var(--color-ink-2);
   font-family: var(--font-terminal);
   font-size: var(--text-md);
-}
-
-.welcome__construction {
-  margin-block: var(--space-md) var(--space-xs);
 }
 
 .lanyard {

@@ -334,22 +334,28 @@ def blinkie(text: str, bg_a, fg_a, bg_b, fg_b, seed: int) -> list[Image.Image]:
 # Small animated bits
 # ---------------------------------------------------------------------------
 def construction() -> list[Image.Image]:
-    w, h = 136, 32
+    """A long, one-line sign: moving hazard stripes at both ends and two lamps flashing in turn.
+    180x22 so it shows at exactly 2x (360x44) under the welcome buttons, the same width and height."""
+    w, h = 180, 22
+    stripe_w = 20
     frames = []
     for f in range(4):
         img = blank(w, h, HAZARD)
         px = img.load()
-        for y in list(range(0, 7)) + list(range(h - 7, h)):
-            for x in range(w):
-                px[x, y] = BLACK if ((x + y + f * 3) // 6) % 2 == 0 else HAZARD
+        for y in range(h):
+            for x in list(range(0, stripe_w)) + list(range(w - stripe_w, w)):
+                px[x, y] = BLACK if ((x + y + f * 2) // 4) % 2 == 0 else HAZARD
         d = ImageDraw.Draw(img)
         d.rectangle([0, 0, w - 1, h - 1], outline=BLACK)
-        lamp = RED if f % 2 == 0 else CRIMSON
-        d.ellipse([4, 10, 15, 21], fill=lamp, outline=BLACK)
-        if f % 2 == 0:
-            d.point([(7, 13), (8, 13), (7, 14)], fill=YELLOW)
-        draw_text(img, 20, 9, "UNDER", BLACK)
-        draw_text(img, 20, 17, "CONSTRUCTION", BLACK)
+        d.line([stripe_w, 1, stripe_w, h - 2], fill=BLACK)
+        d.line([w - stripe_w - 1, 1, w - stripe_w - 1, h - 2], fill=BLACK)
+        for i, cx in enumerate((stripe_w + 7, w - stripe_w - 8)):
+            on = (f + i) % 2 == 0
+            d.ellipse([cx - 5, 5, cx + 5, 15], fill=RED if on else CRIMSON, outline=BLACK)
+            if on:
+                d.point([(cx - 2, 8), (cx - 1, 8), (cx - 2, 9)], fill=YELLOW)
+        text = "UNDER CONSTRUCTION"
+        draw_text(img, centred_x(w, text), 7, text, BLACK)
         frames.append(img)
     return frames
 
