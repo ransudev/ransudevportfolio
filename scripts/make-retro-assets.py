@@ -47,9 +47,11 @@ LIME = (0x33, 0xFF, 0x33)
 PINK = (0xFF, 0x99, 0xCC)
 TABBY = (0xFF, 0x88, 0x22)
 BURNT = (0xB3, 0x47, 0x00)
+NIGHT = (0x0E, 0x05, 0x14)
+DUSK = (0x2A, 0x0C, 0x1E)
 
 PALETTE = [KEY, DEEP, PRIMARY, MID, TERRA, AMBER, ORANGE, RED, CRIMSON, GOLD, YELLOW, HAZARD,
-           CREAM, TAN, GREY, DARKGREY, WHITE, BLACK, INK, NAVY, BLUE, SKY, LIME, PINK, TABBY, BURNT]
+           CREAM, TAN, GREY, DARKGREY, WHITE, BLACK, INK, NAVY, BLUE, SKY, LIME, PINK, TABBY, BURNT, NIGHT, DUSK]
 
 # ---------------------------------------------------------------------------
 # 5x7 bitmap font, drawn by hand. Lowercase is drawn as uppercase.
@@ -557,6 +559,87 @@ def b88_cats() -> list[Image.Image]:
 
 
 # ---------------------------------------------------------------------------
+# Banner: a night sky over rooftops, with a moon and a black cat on the roof.
+# ---------------------------------------------------------------------------
+def banner_sky() -> list[Image.Image]:
+    """A tileable starry sky that glows oxblood towards the horizon. Stars twinkle across 3 frames."""
+    w, h = 128, 176
+    base = blank(w, h)
+    # Dithered bands: night at the top, dusk, then brand oxblood glowing near the rooftops.
+    dither_vertical(base, (0, 0, w, 70), NIGHT, DUSK)
+    dither_vertical(base, (0, 70, w, 130), DUSK, DEEP)
+    dither_vertical(base, (0, 130, w, h), DEEP, PRIMARY)
+    rnd = random.Random(1997)
+    stars = [(rnd.randrange(w), rnd.randrange(0, 120), rnd.choice([WHITE, WHITE, YELLOW, GOLD, SKY]), rnd.randrange(3))
+             for _ in range(46)]
+    big = [(18, 22), (77, 48), (108, 14), (46, 90)]
+    frames = []
+    for f in range(3):
+        img = base.copy()
+        px = img.load()
+        for x, y, col, phase in stars:
+            if phase != f:  # each star is off in one frame of three
+                px[x, y] = col
+        for i, (x, y) in enumerate(big):  # four-point twinklers
+            col = WHITE if (i + f) % 3 else GOLD
+            px[x, y] = col
+            if (i + f) % 2 == 0:
+                for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+                    px[(x + dx) % w, y + dy] = col
+        frames.append(img)
+    return frames
+
+
+def banner_roofs() -> list[Image.Image]:
+    """A tileable strip of rooftop silhouettes with a few lit windows."""
+    w, h = 96, 30
+    img = blank(w, h)
+    d = ImageDraw.Draw(img)
+    # Building outlines: (x0, x1, top). Peaked roofs where marked.
+    for x0, x1, top, peak in [(0, 19, 12, False), (20, 41, 6, True), (42, 57, 15, False),
+                              (58, 79, 9, True), (80, 95, 13, False)]:
+        d.rectangle([x0, top, x1, h - 1], fill=INK)
+        if peak:
+            mid = (x0 + x1) // 2
+            d.polygon([(x0, top), (mid, top - 6), (x1, top)], fill=INK)
+    d.rectangle([28, 0, 31, 6], fill=INK)  # chimney
+    d.rectangle([84, 6, 86, 13], fill=INK)  # antenna mast
+    d.line([81, 7, 89, 7], fill=INK)
+    for x, y in [(5, 17), (11, 22), (25, 12), (34, 19), (47, 21), (64, 14), (70, 22), (88, 18)]:
+        d.rectangle([x, y, x + 2, y + 2], fill=GOLD if (x + y) % 3 else AMBER)
+    return [img]
+
+
+def banner_moon() -> list[Image.Image]:
+    img, d = sprite(26, 26)
+    d.ellipse([1, 1, 24, 24], fill=CREAM)
+    d.ellipse([1, 1, 24, 24], outline=YELLOW)
+    for box in ([6, 7, 10, 11], [14, 14, 19, 19], [15, 5, 17, 7], [7, 16, 9, 18]):
+        d.ellipse(box, fill=TAN)
+    out = Image.new("RGB", (26, 26), KEY)
+    out.paste(img.convert("RGB"), (0, 0), img.getchannel("A").point(lambda a: 255 if a else 0))
+    return [out]
+
+
+def roof_cat() -> list[Image.Image]:
+    """A black cat silhouette sitting on the roof, swishing its tail and blinking its gold eyes."""
+    frames = []
+    tails = [(15, 11), (16, 8), (15, 5), (16, 8)]
+    for f, tip in enumerate(tails):
+        img = blank(18, 20)
+        d = ImageDraw.Draw(img)
+        d.line([(10, 18), (14, 16), tip], fill=INK, width=2)
+        d.ellipse([2, 8, 12, 19], fill=INK)
+        d.ellipse([2, 2, 11, 10], fill=INK)
+        d.polygon([(2, 5), (3, 0), (6, 3)], fill=INK)
+        d.polygon([(7, 3), (10, 0), (11, 5)], fill=INK)
+        if f != 3:
+            d.point([(4, 6), (8, 6)], fill=GOLD)
+        frames.append(img)
+    return frames
+
+
+# ---------------------------------------------------------------------------
 # Divider tiles (repeat-x as backgrounds) and the page wallpaper
 # ---------------------------------------------------------------------------
 def divider_stars() -> list[Image.Image]:
@@ -627,6 +710,11 @@ def main() -> None:
     save("divider-stars.gif", divider_stars(), transparent=True)
     save("divider-beads.gif", divider_beads(), transparent=True)
     save("tile.gif", wallpaper())
+
+    save("banner-sky.gif", banner_sky(), duration=[700, 500, 600])
+    save("banner-roofs.gif", banner_roofs(), transparent=True)
+    save("banner-moon.gif", banner_moon(), transparent=True)
+    save("roof-cat.gif", roof_cat(), duration=[400, 400, 400, 900], transparent=True)
 
 
 if __name__ == "__main__":

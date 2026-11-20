@@ -116,18 +116,43 @@ img {
   padding: var(--page-gutter);
 }
 
+/* A starry night over pixel rooftops (GIFs from scripts/make-retro-assets.py). */
 .banner {
+  position: relative;
   display: grid;
   grid-template-columns: auto auto auto;
   justify-content: center;
   align-items: center;
   column-gap: var(--space-md);
-  padding: var(--space-lg) var(--space-md) var(--space-md);
+  padding: var(--space-lg) var(--space-md) 46px;
   background:
-    repeating-linear-gradient(0deg, transparent 0 3px, oklch(0 0 0 / 0.12) 3px 4px),
-    linear-gradient(180deg, var(--color-brand-deep), var(--color-screen));
+    url("/retro/banner-roofs.gif") left bottom / 96px 30px repeat-x,
+    url("/retro/banner-sky.gif") left bottom / 128px 176px repeat,
+    #0e0514;
   border: 3px ridge var(--color-retro-orange);
   text-align: center;
+  image-rendering: pixelated;
+  overflow: hidden;
+}
+
+.banner > :not(.banner__moon, .banner__cat) {
+  position: relative;
+  z-index: 1;
+}
+
+.banner__moon {
+  position: absolute;
+  top: 12px;
+  right: 22px;
+  line-height: 0;
+}
+
+/* Sitting on the flat roof of the third building in the strip. */
+.banner__cat {
+  position: absolute;
+  left: 38px;
+  bottom: 14px;
+  line-height: 0;
 }
 
 .banner__title {
@@ -1350,6 +1375,16 @@ a.b88:hover {
     font-size: var(--text-md);
   }
 
+  .banner__moon {
+    top: 6px;
+    right: 6px;
+  }
+
+  .banner__moon .px img {
+    width: 26px;
+    height: 26px;
+  }
+
   .banner__tagline {
     font-size: var(--text-md);
   }
@@ -1465,5 +1500,12 @@ a.b88:hover {
 
   .trail {
     display: none;
+  }
+
+  .banner {
+    background:
+      url("/retro/banner-roofs.png") left bottom / 96px 30px repeat-x,
+      url("/retro/banner-sky.png") left bottom / 128px 176px repeat,
+      #0e0514;
   }
 }

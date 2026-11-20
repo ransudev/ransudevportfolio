@@ -16,7 +16,7 @@ A 90s personal homepage, in the Neocities / GeoCities tradition: tiled wallpaper
 
 One page, in this order: Banner → Marquee → (Sidebar | Welcome → Projects → Skills → About → Contact) → Footer.
 
-- **Banner:** the page's only `<h1>` ("Ransu.dev") in Pixelify Sans with stacked hard text shadows, plus the tagline "Break it. Fix it. Ship it."
+- **Banner:** the page's only `<h1>` ("Ransu.dev") in Pixelify Sans with stacked hard text shadows, plus the tagline "Break it. Fix it. Ship it." It sits on a pixel night scene: a twinkling, tileable starry sky that glows oxblood towards the horizon, a repeat-x strip of rooftops with lit windows, a full moon in the top-right corner and a black cat on the roof that swishes its tail and blinks (`banner-sky`, `banner-roofs`, `banner-moon`, `roof-cat` in `public/retro/`).
 - **Marquee:** a sunken "screen" strip with site news (`app/data/badges.ts`). Pauses on hover.
 - **Sidebar** (sticky on desktop): the nav window with active-section highlight, `status.txt`, the hit counter, blinkies and the 88x31 button wall. Under 48rem the nav becomes a sticky one-row bar at the top and the extras move below the content.
 - **Welcome** (`welcome.html` window): greeting, CTAs ("See my projects", "Get in touch"), an under-construction sign, and the lanyard ID badge.
