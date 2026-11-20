@@ -1,5 +1,6 @@
 import RetroWindow from "../../components/retro/RetroWindow";
 import { skillCategories } from "../../data/skills";
+import { BackToTop, Divider } from "../../components/retro/Badges";
 
 export default function SkillsPage() {
   return (
@@ -7,6 +8,7 @@ export default function SkillsPage() {
       <h2 id="skills-title" className="section-title">
         <span aria-hidden="true">✦ </span>My Toolbox<span aria-hidden="true"> ✦</span>
       </h2>
+      <Divider kind="beads" />
 
       <RetroWindow title="C:\RANSU\TOOLS" icon="▤">
         <div className="toolbox">
@@ -27,6 +29,7 @@ export default function SkillsPage() {
           it.
         </p>
       </RetroWindow>
+      <BackToTop />
     </section>
   );
 }

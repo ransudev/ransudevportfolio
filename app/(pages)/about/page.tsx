@@ -1,6 +1,7 @@
 import Image from "next/image";
 import RetroWindow from "../../components/retro/RetroWindow";
 import { aboutParagraphs, infoCards } from "../../data/about";
+import { BackToTop, Divider } from "../../components/retro/Badges";
 
 export default function AboutPage() {
   return (
@@ -8,6 +9,7 @@ export default function AboutPage() {
       <h2 id="about-title" className="section-title">
         <span aria-hidden="true">✦ </span>About Me<span aria-hidden="true"> ✦</span>
       </h2>
+      <Divider kind="stars" />
 
       <RetroWindow title="about_me.txt" icon="☺">
         <div className="about">
@@ -36,6 +38,7 @@ export default function AboutPage() {
           Got a problem that needs taking apart? <a href="#contact">Drop me a line ►</a>
         </p>
       </RetroWindow>
+      <BackToTop />
     </section>
   );
 }

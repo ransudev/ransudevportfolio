@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import RetroWindow from "../../components/retro/RetroWindow";
 import { contactInfo, socialLinks } from "../../data/socials";
+import { BackToTop, Divider, RetroImg } from "../../components/retro/Badges";
 
 type CopyTarget = "email" | "discord";
 
@@ -35,12 +36,15 @@ export default function ContactPage() {
       <h2 id="contact-title" className="section-title">
         <span aria-hidden="true">✦ </span>Contact<span aria-hidden="true"> ✦</span>
       </h2>
+      <Divider kind="flame" />
 
       <RetroWindow title="new_message.eml" icon="✉">
         <div className="contact">
-          <p className="contact__pitch">Got something to ship? E-mail me!!</p>
-          <span className="contact__mail" aria-hidden="true">✉</span>
-          <a href={`mailto:${contactInfo.email}`} className="contact__email">
+          <p className="contact__pitch">
+            <RetroImg src="/retro/mail.gif" width={34} height={24} /> Got something to ship? E-mail me!!{" "}
+            <RetroImg src="/retro/mail.gif" width={34} height={24} />
+          </p>
+                    <a href={`mailto:${contactInfo.email}`} className="contact__email">
             {emailUser}@<wbr />{emailDomain}
           </a>
           <div className="contact__actions">
@@ -80,6 +84,10 @@ export default function ContactPage() {
                 </button>
               </td>
             </tr>
+            <tr>
+              <th scope="row">Guestbook</th>
+              <td>no guestbook yet, so the email up there is the guestbook ✉</td>
+            </tr>
           </tbody>
         </table>
 
@@ -87,6 +95,7 @@ export default function ContactPage() {
           {copied === "email" ? "Email address copied" : copied === "discord" ? "Discord username copied" : ""}
         </p>
       </RetroWindow>
+      <BackToTop />
     </section>
   );
 }

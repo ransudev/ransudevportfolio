@@ -1,6 +1,6 @@
 import HeroLanyard from "../../components/ui/HeroLanyard";
 import RetroWindow from "../../components/retro/RetroWindow";
-import { UnderConstruction } from "../../components/retro/Badges";
+import { SpinStar, UnderConstruction } from "../../components/retro/Badges";
 
 export default function HomePage() {
   return (
@@ -9,7 +9,7 @@ export default function HomePage() {
         <div className="welcome">
           <div className="welcome__copy">
             <h2 id="home-title" className="welcome__title">
-              Welcome 2 my homepage!!
+              <SpinStar /> Welcome 2 my homepage!! <SpinStar />
             </h2>
             <p>
               Hi, I&apos;m <strong>Lance</strong>, a computer science student from the Philippines. I build desktop
@@ -26,7 +26,9 @@ export default function HomePage() {
                 ✉ Get in touch
               </a>
             </div>
-            <UnderConstruction />
+            <p className="welcome__construction">
+              <UnderConstruction />
+            </p>
             <p className="welcome__note">
               this site is always under construction. so am i.
             </p>

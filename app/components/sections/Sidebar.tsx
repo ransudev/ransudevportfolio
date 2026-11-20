@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import RetroWindow from "../retro/RetroWindow";
 import HitCounter from "../retro/HitCounter";
-import { BlinkieStack, ButtonWall } from "../retro/Badges";
+import { BlinkieStack, ButtonWall, RetroImg, SpinStar } from "../retro/Badges";
 
 const navLinks = [
   { href: "#home", id: "home", label: "Home" },
@@ -102,7 +102,7 @@ export default function Sidebar() {
                 className="sidenav__link"
                 aria-current={activeSection === link.id ? "location" : undefined}
               >
-                <span className="sidenav__arrow" aria-hidden="true">►</span>
+                <RetroImg src="/retro/bullet.gif" width={9} height={9} className="sidenav__arrow" />
                 {link.label}
               </a>
             </li>
@@ -131,6 +131,9 @@ export default function Sidebar() {
         <HitCounter />
         <BlinkieStack />
         <ButtonWall />
+        <p className="sidebar__thanks">
+          <SpinStar /> thanks 4 visiting! <SpinStar />
+        </p>
       </aside>
     </div>
   );

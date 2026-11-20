@@ -161,6 +161,12 @@ img {
   filter: drop-shadow(3px 3px 0 var(--color-retro-orange)) drop-shadow(3px 3px 0 var(--color-ink));
 }
 
+.banner__stars .px img {
+  width: 30px;
+  height: 30px;
+  margin-inline: 2px;
+}
+
 .banner__stars {
   margin: 0;
   color: var(--color-title-gold);
@@ -482,7 +488,7 @@ img {
   margin: 0 0 var(--space-sm);
   color: var(--color-brand-primary);
   font-family: var(--font-display);
-  font-size: var(--text-xl);
+  font-size: 1.75rem;
   font-weight: 700;
   line-height: 1.1;
 }
@@ -504,28 +510,8 @@ img {
   font-size: var(--text-md);
 }
 
-.construction {
-  display: flex;
-  align-items: stretch;
-  max-width: 22rem;
+.welcome__construction {
   margin-block: var(--space-md) var(--space-xs);
-  border: 2px solid var(--color-ink);
-  background: var(--color-retro-amber);
-}
-
-.construction__stripes {
-  flex: 1;
-  min-width: 1.5rem;
-  background: repeating-linear-gradient(-45deg, var(--color-ink) 0 6px, var(--color-retro-amber) 6px 12px);
-}
-
-.construction__text {
-  padding: 2px var(--space-xs);
-  color: var(--color-ink);
-  font-family: var(--font-terminal);
-  font-size: var(--text-md);
-  letter-spacing: 0.06em;
-  white-space: nowrap;
 }
 
 .lanyard {
@@ -864,20 +850,8 @@ a.project__frame:hover {
   line-height: 1.1;
 }
 
-.project__new {
-  padding: 1px 6px;
-  background: var(--color-brand-primary);
-  color: var(--color-retro-amber);
-  font-family: var(--font-terminal);
-  font-size: var(--text-base);
-  animation: new-blink 0.9s steps(2, jump-none) infinite;
-}
-
-@keyframes new-blink {
-  50% {
-    background: var(--color-retro-amber);
-    color: var(--color-brand-primary);
-  }
+.new-badge {
+  margin-inline-start: 2px;
 }
 
 .project__content p {
@@ -1035,17 +1009,8 @@ a.project__frame:hover {
   line-height: 1.1;
 }
 
-.contact__mail {
-  color: var(--color-retro-orange);
-  font-size: 3rem;
-  line-height: 1;
-  animation: mail-bob 1.2s steps(2, jump-none) infinite;
-}
-
-@keyframes mail-bob {
-  50% {
-    transform: translateY(-4px) rotate(-6deg);
-  }
+.contact__pitch .px {
+  margin-inline: 4px;
 }
 
 .contact__email {
@@ -1128,48 +1093,24 @@ a.project__frame:hover {
   line-height: 1;
 }
 
+/* ---------- Pixel GIFs (drawn by scripts/make-retro-assets.py) ---------- */
+
+/* GIFs keep hard edges and sit on the text line like old <img> tags. */
+.px {
+  display: inline-block;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.px img {
+  image-rendering: pixelated;
+  vertical-align: middle;
+}
+
 .blinkie-stack {
   display: grid;
   justify-items: center;
-  gap: 4px;
-}
-
-.blinkie {
-  width: 150px;
-  height: 20px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--color-ink);
-  background: var(--blink-a);
-  color: var(--blink-b);
-  font-family: var(--font-terminal);
-  font-size: 15px;
-  line-height: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  animation: blinkie 1s steps(2, jump-none) infinite;
-}
-
-.blinkie--oxblood {
-  --blink-a: var(--color-brand-deep);
-  --blink-b: var(--color-retro-amber);
-}
-
-.blinkie--terracotta {
-  --blink-a: var(--color-retro-orange);
-  --blink-b: var(--color-ink);
-}
-
-.blinkie--gold {
-  --blink-a: var(--color-retro-red);
-  --blink-b: var(--color-retro-amber);
-}
-
-@keyframes blinkie {
-  50% {
-    background: var(--blink-b);
-    color: var(--blink-a);
-  }
+  gap: 3px;
 }
 
 .b88-wall {
@@ -1179,69 +1120,63 @@ a.project__frame:hover {
   gap: 4px;
 }
 
-.b88,
-.b88:visited {
-  width: 88px;
-  height: 31px;
-  display: grid;
-  align-content: center;
-  border: 1px solid var(--color-ink);
-  box-shadow: inset -1px -1px 0 oklch(0 0 0 / 0.35), inset 1px 1px 0 oklch(1 0 0 / 0.45);
-  background: var(--b88-bg);
-  color: var(--b88-ink);
-  font-family: var(--font-terminal);
-  line-height: 0.95;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  overflow: hidden;
-}
-
+a.b88,
 a.b88:hover {
-  background: var(--b88-bg);
-  color: var(--b88-ink);
-  filter: brightness(1.15);
+  line-height: 0;
+  background: none;
 }
 
-.b88__top {
-  font-size: 12px;
-  letter-spacing: 0.04em;
+.sidebar__thanks {
+  margin: 0;
+  color: var(--color-paper);
+  font-family: var(--font-terminal);
+  font-size: var(--text-md);
+  text-align: center;
 }
 
-.b88__bottom {
-  font-size: 15px;
-  color: var(--b88-accent, inherit);
+/* Image <hr>s: a repeat-x strip of a small GIF tile. */
+.divider {
+  width: 100%;
+  margin: 0 auto;
+  background-repeat: repeat-x;
+  background-position: center;
+  image-rendering: pixelated;
 }
 
-.b88--oxblood {
-  --b88-bg: var(--color-brand-deep);
-  --b88-ink: var(--color-paper);
-  --b88-accent: var(--color-retro-amber);
+.divider--flame {
+  height: 12px;
+  background-image: url("/retro/divider-flame.gif");
 }
 
-.b88--terracotta {
-  --b88-bg: var(--color-retro-orange);
-  --b88-ink: var(--color-ink);
+.divider--stars {
+  width: 60%;
+  height: 11px;
+  background-image: url("/retro/divider-stars.gif");
 }
 
-.b88--ink {
-  --b88-bg: var(--color-ink);
-  --b88-ink: var(--color-screen-text);
+.divider--beads {
+  width: 50%;
+  height: 8px;
+  background-image: url("/retro/divider-beads.gif");
 }
 
-.b88--gold {
-  --b88-bg: var(--color-retro-red);
-  --b88-ink: var(--color-bevel-light);
+.back-to-top {
+  margin: calc(var(--space-xs) * -1) 0 0;
+  text-align: right;
+  font-family: var(--font-terminal);
+  font-size: var(--text-md);
 }
 
-.b88--blue {
-  --b88-bg: var(--color-pop-blue);
-  --b88-ink: var(--color-bevel-light);
+.back-to-top a,
+.back-to-top a:visited {
+  display: inline-block;
+  padding: 10px 2px;
+  color: var(--color-retro-amber);
 }
 
-.b88--cream {
-  --b88-bg: var(--color-paper);
-  --b88-ink: var(--color-brand-primary);
+.back-to-top a:hover {
+  background: var(--color-retro-amber);
+  color: var(--color-ink);
 }
 
 /* ---------- Footer ---------- */
@@ -1254,22 +1189,8 @@ a.b88:hover {
   text-align: center;
 }
 
-.rainbow-rule {
-  height: 6px;
-  margin: 0 0 var(--space-md);
-  border: 0;
-  background: linear-gradient(
-    90deg,
-    var(--color-brand-deep),
-    var(--color-brand-primary),
-    var(--color-brand-mid),
-    var(--color-retro-orange),
-    var(--color-retro-amber),
-    var(--color-retro-orange),
-    var(--color-brand-mid),
-    var(--color-brand-primary),
-    var(--color-brand-deep)
-  );
+.site-footer .divider {
+  margin-bottom: var(--space-md);
 }
 
 .site-footer p {
@@ -1468,5 +1389,9 @@ a.b88:hover {
 
   .trail {
     display: none;
+  }
+
+  .divider--flame {
+    background-image: url("/retro/divider-flame.png");
   }
 }

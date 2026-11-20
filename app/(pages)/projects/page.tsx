@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { projects, type Project } from "../../data/projects";
+import { BackToTop, Divider, NewBadge } from "../../components/retro/Badges";
 
 function displayUrl(url: string) {
   const { host, pathname } = new URL(url);
@@ -44,6 +45,7 @@ export default function ProjectsPage() {
       <h2 id="projects-title" className="section-title">
         <span aria-hidden="true">✦ </span>My Projects<span aria-hidden="true"> ✦</span>
       </h2>
+      <Divider kind="flame" />
       <p className="section-lede">
         Stuff I actually built and shipped. Click around, they&apos;re real.
       </p>
@@ -100,7 +102,7 @@ export default function ProjectsPage() {
                 <div className="project__content">
                   <h3 id={`project-${project.id}`} className="project__title">
                     {project.title}
-                    {project.featured && <span className="project__new">NEW!</span>}
+                    {project.featured && <NewBadge />}
                   </h3>
                   <p>{project.description}</p>
                   <p className="project__stack">
@@ -130,6 +132,7 @@ export default function ProjectsPage() {
           );
         })}
       </div>
+      <BackToTop />
     </section>
   );
 }
