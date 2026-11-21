@@ -223,6 +223,59 @@ def b88_ransu() -> list[Image.Image]:
     return frames
 
 
+AVATAR = OUT.parent / "lance-pixel-avatar.png"
+
+
+def b88_webring() -> list[Image.Image]:
+    """My link-back button for other sites: the banner's red night, rooftops and moon, plus my avatar."""
+    w, h = 88, 31
+    rnd = random.Random(88)
+    stars = [(rnd.randrange(31, 86), rnd.randrange(2, 22), rnd.choice([WHITE, YELLOW, GOLD]), rnd.randrange(3))
+             for _ in range(14)]
+    # The avatar keeps its own colours, so this button is saved with an adaptive palette.
+    face = Image.open(AVATAR).convert("RGB").crop((8, 4, 184, 180)).resize((25, 25), Image.Resampling.LANCZOS)
+    frames = []
+    for f in range(3):
+        img = blank(w, h)
+        dither_vertical(img, (0, 0, w, 16), NIGHT, DUSK)
+        dither_vertical(img, (0, 16, w, h), DUSK, PRIMARY)
+        px = img.load()
+        for x, y, col, phase in stars:
+            if phase != f:
+                px[x, y] = col
+        d = ImageDraw.Draw(img)
+        # Moon in the corner.
+        d.ellipse([77, 3, 84, 10], fill=CREAM, outline=YELLOW)
+        px[79, 5] = TAN
+        px[81, 7] = TAN
+        # Rooftops along the bottom, with a couple of lit windows.
+        for x0, x1, top in [(30, 39, 25), (40, 50, 23), (51, 58, 26), (59, 70, 24), (71, 80, 25), (81, 87, 23)]:
+            d.rectangle([x0, top, x1, h - 1], fill=INK)
+        d.polygon([(40, 23), (45, 20), (50, 23)], fill=INK)
+        d.polygon([(59, 24), (64, 21), (70, 24)], fill=INK)
+        for x, y in [(43, 26), (62, 27), (84, 26)]:
+            px[x, y] = GOLD if (x + f) % 3 else AMBER
+        draw_text(img, 37, 5, "RANSU", GOLD, shadow=BLACK)
+        draw_text(img, 40, 14, ".DEV", AMBER, shadow=BLACK)
+        # Avatar in a gold frame on the left.
+        d.rectangle([2, 2, 28, 28], outline=GOLD)
+        img.paste(face, (3, 3))
+        bevel(img, MID, BLACK)
+        frames.append(img)
+    return frames
+
+
+def save_full_colour(name: str, frames: list[Image.Image], duration: int | list[int] = 400) -> None:
+    """Like save(), but with one adaptive palette shared by every frame (for photos and avatars)."""
+    OUT.mkdir(parents=True, exist_ok=True)
+    first = frames[0].quantize(colors=255, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE)
+    pframes = [first] + [f.quantize(palette=first, dither=Image.Dither.NONE) for f in frames[1:]]
+    pframes[0].save(OUT / name, save_all=True, append_images=pframes[1:], duration=duration, loop=0,
+                    disposal=2, optimize=False)
+    pframes[0].convert("RGB").save(OUT / name.replace(".gif", ".png"))
+    print(f"  {name:28s} {frames[0].width}x{frames[0].height}  {len(frames)} frame(s)")
+
+
 def b88_rust() -> list[Image.Image]:
     img = blank(88, 31, ORANGE)
     d = ImageDraw.Draw(img)
@@ -701,6 +754,7 @@ def page_sky() -> list[Image.Image]:
 def main() -> None:
     print(f"Writing to {OUT}")
     save("88-ransu.gif", b88_ransu(), duration=180)
+    save_full_colour("88-ransu-webring.gif", b88_webring(), duration=[700, 500, 600])
     save("88-rust.gif", b88_rust())
     save("88-nextjs.gif", b88_next())
     save("88-ai.gif", b88_ai())
