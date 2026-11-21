@@ -134,6 +134,27 @@ export default function Sidebar() {
         <Cat pose="sit" className="sidebar__cat" />
         <BlinkieStack />
         <ButtonWall />
+        <RetroWindow title="webring" icon="◎">
+          <div className="webring">
+            <a
+              href="https://elythria.dev/"
+              className="b88"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visit elythria.dev"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://elythria.dev/img/elythria-button.svg"
+                width={88}
+                height={31}
+                alt="Visit elythria.dev"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+          </div>
+        </RetroWindow>
         <p className="sidebar__thanks">
           <SpinStar /> thanks 4 visiting! <SpinStar />
         </p>
