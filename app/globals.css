@@ -1034,6 +1034,472 @@ a.project__frame:hover {
   background: var(--color-bevel-light);
 }
 
+/* ---------- Misc: vinyl records ---------- */
+
+.crate__heading {
+  margin: 0 0 var(--space-sm);
+  color: var(--color-brand-primary);
+  font-family: var(--font-terminal);
+  font-size: var(--text-md);
+  font-weight: 400;
+  text-align: center;
+}
+
+/* A vinyl disc: grooves, dark rings, the album art as the label, a spindle hole. */
+.vinyl {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, transparent 0 33%, oklch(0.1 0 0) 33% 36%, transparent 36% 47%, oklch(0.1 0 0) 47% 48%, transparent 48%),
+    repeating-radial-gradient(circle, oklch(0.15 0 0) 0 1.5px, oklch(0.22 0 0) 1.5px 2.5px),
+    oklch(0.14 0 0);
+  box-shadow: 2px 2px 0 var(--color-ink);
+}
+
+.vinyl img {
+  width: 34%;
+  height: 34%;
+  border-radius: 50%;
+  object-fit: cover;
+  mask: radial-gradient(circle, transparent 0 8%, #000 9%);
+}
+
+/* No cover: a plain red label. */
+.vinyl:not(:has(img))::before {
+  content: "";
+  width: 34%;
+  height: 34%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-ink) 0 8%, var(--color-retro-crimson) 9%);
+}
+
+/* Light glinting off the grooves. It sits on a wrapper that doesn't spin, so the shine stays put. */
+.turntable__platter::after,
+.record__slot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 20deg,
+    transparent 0 10%,
+    oklch(1 0 0 / 0.16) 14%,
+    transparent 19% 58%,
+    oklch(1 0 0 / 0.1) 62%,
+    transparent 67%
+  );
+  mask: radial-gradient(circle, transparent 0 36%, #000 37%);
+  pointer-events: none;
+}
+
+@keyframes vinyl-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* ----- Now spinning: #1 on a wooden hi-fi console ----- */
+
+.console {
+  display: grid;
+  grid-template-columns: 12.5rem minmax(0, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  background:
+    repeating-linear-gradient(90deg, transparent 0 18px, oklch(0 0 0 / 0.1) 18px 20px),
+    linear-gradient(180deg, var(--color-brand-mid), var(--color-brand-deep));
+  box-shadow: var(--bevel-out), 5px 5px 0 var(--color-ink);
+}
+
+/* The recessed well the turntable sits in. */
+.console__deck {
+  position: relative;
+  height: 12.5rem;
+  background: oklch(0 0 0 / 0.25);
+  box-shadow: inset 2px 2px 0 oklch(0 0 0 / 0.4), inset -2px -2px 0 oklch(1 0 0 / 0.15);
+}
+
+.turntable__platter {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  width: 10.6rem;
+  height: 10.6rem;
+  padding: 4px;
+  border-radius: 50%;
+  background: oklch(0.55 0.01 60);
+  box-shadow: inset 0 0 0 2px var(--color-ink);
+}
+
+.turntable__platter::after {
+  inset: 4px;
+}
+
+.vinyl--spinning {
+  animation: vinyl-spin 1.8s steps(24) infinite;
+}
+
+/* The tonearm swings in from its rest and drops onto the record when the page loads. */
+.turntable__arm {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-ink) 0 25%, oklch(0.8 0.01 80) 26% 60%, oklch(0.5 0.01 80) 61%);
+  box-shadow: 1px 1px 0 var(--color-ink);
+  animation: arm-drop 1.2s steps(6) 0.4s both;
+}
+
+/* The arm itself; at 24deg its needle lands in the grooves, about halfway out. */
+.turntable__wand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 6.6rem;
+  margin-left: -2.5px;
+  background: oklch(0.82 0.01 80);
+  box-shadow: 1px 0 0 var(--color-ink), -1px 0 0 var(--color-ink);
+  transform-origin: 50% 0;
+  rotate: 24deg;
+}
+
+/* The headshell at the end of the arm. */
+.turntable__wand::after {
+  content: "";
+  position: absolute;
+  bottom: -0.7rem;
+  left: 50%;
+  width: 1rem;
+  height: 1.4rem;
+  margin-left: -0.5rem;
+  background: var(--color-ink);
+  border: 2px solid oklch(0.82 0.01 80);
+}
+
+@keyframes arm-drop {
+  from {
+    rotate: -32deg;
+  }
+  to {
+    rotate: 0deg;
+  }
+}
+
+.console__panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  min-width: 0;
+}
+
+/* Engraved brass nameplate with the track on it. */
+.console__plate {
+  align-self: stretch;
+  padding: var(--space-xs) var(--space-sm);
+  background: linear-gradient(180deg, var(--color-title-gold-light), var(--color-title-gold) 40%, var(--color-title-gold-deep));
+  border: 2px solid var(--color-ink);
+  box-shadow: inset 1px 1px 0 oklch(1 0 0), 2px 2px 0 var(--color-ink);
+  color: var(--color-ink);
+}
+
+.console__plate p {
+  margin: 0;
+}
+
+.console__kicker {
+  color: var(--color-brand-deep);
+  font-family: var(--font-terminal);
+  font-size: var(--text-sm);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.console__title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.console__artist {
+  font-family: var(--font-terminal);
+  font-size: var(--text-base);
+  line-height: 1.1;
+}
+
+.console__artist cite {
+  font-style: normal;
+}
+
+.console__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* VU meter: a cream dial with a needle that bounces in steps. */
+.vu {
+  position: relative;
+  width: 6.5rem;
+  height: 3.6rem;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 110%, oklch(0.98 0.04 95), oklch(0.88 0.09 88));
+  border: 2px solid var(--color-ink);
+  box-shadow: inset 2px 2px 0 oklch(0 0 0 / 0.3);
+}
+
+.vu::before {
+  content: "VU";
+  position: absolute;
+  left: 6px;
+  bottom: 2px;
+  color: var(--color-retro-crimson);
+  font-family: var(--font-terminal);
+  font-size: var(--text-xs);
+}
+
+/* The red zone. */
+.vu::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 1.6rem;
+  height: 6px;
+  background: var(--color-retro-crimson);
+}
+
+.vu__needle {
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  width: 2px;
+  height: 3.4rem;
+  background: var(--color-ink);
+  transform-origin: 50% 100%;
+  animation: vu-bounce 1.6s steps(8) infinite;
+}
+
+@keyframes vu-bounce {
+  0%,
+  100% {
+    rotate: -35deg;
+  }
+  30% {
+    rotate: 10deg;
+  }
+  45% {
+    rotate: -5deg;
+  }
+  70% {
+    rotate: 28deg;
+  }
+  85% {
+    rotate: 0deg;
+  }
+}
+
+/* 33/45 speed buttons, with 33 pressed in. */
+.console__speed {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.console__speed span {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 1.4rem;
+  background: var(--color-paper-2);
+  box-shadow: var(--bevel-out);
+  font-family: var(--font-terminal);
+  font-size: var(--text-sm);
+}
+
+.console__speed .is-on {
+  background: var(--color-title-gold);
+  box-shadow: var(--bevel-in);
+}
+
+/* The power light. */
+.console__led {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-retro-red);
+  box-shadow: 0 0 6px var(--color-retro-red);
+  animation: console-blink 1s steps(1) infinite;
+}
+
+@keyframes console-blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* ----- The crate: #2 onwards ----- */
+
+.crate {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: var(--space-lg) var(--space-md);
+  margin: 0;
+  padding: var(--space-md);
+  list-style: none;
+  background: var(--color-paper-2);
+  box-shadow: var(--bevel-in);
+}
+
+.record__link,
+.record__link:visited {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+/* Only the title gets the site's orange link highlight, not the whole card. */
+.record__link:hover {
+  background: none;
+}
+
+/* Sleeve in front, disc tucked behind it and peeking out to the right. */
+.record__art {
+  --sleeve: 6.5rem;
+  position: relative;
+  display: block;
+  width: calc(var(--sleeve) * 1.5);
+  height: var(--sleeve);
+  margin-bottom: var(--space-2xs);
+}
+
+.record__sleeve,
+.record__slot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--sleeve);
+  height: var(--sleeve);
+}
+
+.record__slot {
+  translate: 30% 0;
+  transition: translate 0.3s steps(5);
+}
+
+.record__sleeve {
+  z-index: 1;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--color-brand-mid), var(--color-brand-deep));
+  border: 2px solid var(--color-ink);
+  box-shadow: 3px 3px 0 var(--color-ink);
+  transition: translate 0.2s steps(2), rotate 0.2s steps(2);
+}
+
+.record__sleeve img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.record__rank {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0 5px;
+  background: var(--color-retro-crimson);
+  color: var(--color-title-gold);
+  font-family: var(--font-terminal);
+  font-size: var(--text-md);
+  line-height: 1.1;
+}
+
+/* Hover or focus: the sleeve lifts and tilts, the disc slides out and starts spinning. */
+.record__link:hover .record__sleeve,
+.record__link:focus-visible .record__sleeve {
+  translate: 0 -4px;
+  rotate: -3deg;
+}
+
+.record__link:hover .record__slot,
+.record__link:focus-visible .record__slot {
+  translate: 55% -2px;
+}
+
+.record__link:hover .vinyl,
+.record__link:focus-visible .vinyl {
+  animation: vinyl-spin 1.2s steps(16) infinite;
+}
+
+.record__link:hover .record__title,
+.record__link:focus-visible .record__title {
+  align-self: flex-start;
+  background: var(--color-retro-orange);
+}
+
+/* As the crate scrolls into view, each disc slides out of its sleeve, one after another. */
+@supports (animation-timeline: view()) {
+  .record__slot {
+    animation: disc-peek linear both;
+    animation-timeline: view();
+    animation-range: entry calc(20% + var(--i) * 12%) cover calc(30% + var(--i) * 6%);
+  }
+
+  .record__link:hover .record__slot,
+  .record__link:focus-visible .record__slot {
+    animation: none;
+  }
+}
+
+@keyframes disc-peek {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 30% 0;
+  }
+}
+
+.record__title {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.record__artist {
+  color: var(--color-ink-2);
+  font-family: var(--font-terminal);
+  font-size: var(--text-base);
+  line-height: 1.1;
+}
+
+.crate__empty {
+  margin: 0;
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+  background: var(--color-paper-2);
+  box-shadow: var(--bevel-in);
+}
+
+.crate__meta {
+  margin: var(--space-xs) 0 0;
+  color: var(--color-ink-2);
+  font-family: var(--font-terminal);
+  font-size: var(--text-base);
+  text-align: right;
+}
+
 /* ---------- Contact ---------- */
 
 .contact {
@@ -1479,6 +1945,21 @@ a.b88:hover {
 
   .facts th {
     width: 6.5rem;
+  }
+
+  .console {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+
+  .console__deck {
+    width: 12.5rem;
+  }
+
+  .console__panel {
+    align-items: center;
+    align-self: stretch;
+    text-align: center;
   }
 }
 
