@@ -14,7 +14,7 @@ A 90s personal homepage, in the Neocities / GeoCities tradition: tiled wallpaper
 
 ## Macrostructure
 
-One page, in this order: Banner → Marquee → (Sidebar | Welcome → Projects → Skills → About → Contact) → Footer.
+One page, in this order: Banner → Marquee → (Sidebar | Welcome → Projects → Skills → About → Misc → Contact) → Footer.
 
 - **Banner:** the page's only `<h1>` ("Ransu.dev") in Pixelify Sans with stacked hard text shadows (no tagline). It sits on a pixel night scene: a twinkling, tileable red night sky that glows oxblood towards the horizon, a repeat-x strip of rooftops with lit windows, a full moon in the top-right corner and a black cat on the roof that swishes its tail and blinks (`banner-sky`, `banner-roofs`, `banner-moon`, `roof-cat` in `public/retro/`).
 - **Marquee:** a sunken "screen" strip with site news (`app/data/badges.ts`). Pauses on hover.
@@ -22,6 +22,7 @@ One page, in this order: Banner → Marquee → (Sidebar | Welcome → Projects 
 - **Welcome** (`welcome.html` window): greeting, CTAs ("See my projects", "Get in touch"), an under-construction sign, and the lanyard ID badge.
 - **Projects:** one window per project, titled `name.exe`, with an address bar, a sunken screenshot frame, and a NEW! tag on the featured project. The featured project's screenshot spans the full width; the rest sit media-left, text-right. Projects without a screenshot get a scanlined poster in their tone colour with a file icon.
 - **Skills** (`C:\RANSU\TOOLS`), **About** (`about_me.txt`), **Contact** (`new_message.eml`): windows holding lists and beveled tables.
+- **Misc** (`on_repeat.m3u`): Lance's Spotify top tracks of the last 4 weeks. #1 plays on a wooden hi-fi console: the record spins, the tonearm swings onto it on load, and beside it sit a brass nameplate with the track, a VU meter whose needle bounces, 33/45 speed buttons and a power light. Lance picked this over four mocked-up options (the plain turntable, a 90s media player, a jukebox, a sleeve with liner notes). #2 onwards sit in a crate as records half out of their sleeves; the discs slide out one by one as the crate scrolls into view, and hovering or focusing one lifts the sleeve and spins the disc. All of it moves in `steps()`. The data is `app/data/top-tracks.json` with covers in `public/spotify/`, refreshed monthly by `.github/workflows/spotify.yml` (`scripts/fetch-spotify.mjs`).
 - Section titles are `<h2>`s in WordArt Pixelify Sans with ✦ ornaments, sitting directly on the wallpaper.
 
 ## Theme

@@ -1,0 +1,44 @@
+# Refreshes the "on repeat" records in the Misc section once a month.
+# Fetches Lance's top Spotify tracks, commits app/data/top-tracks.json + public/spotify/,
+# and the push to master triggers the normal Cloudflare build.
+#
+# Needs repo secrets: SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN.
+# Run it by hand from the Actions tab ("Run workflow") to refresh right away.
+name: Refresh Spotify tracks
+
+on:
+  schedule:
+    - cron: "0 6 1 * *" # 06:00 UTC on the 1st of every month
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch top tracks
+        run: node scripts/fetch-spotify.mjs
+        env:
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+          SPOTIFY_REFRESH_TOKEN: ${{ secrets.SPOTIFY_REFRESH_TOKEN }}
+
+      - name: Commit if changed
+        run: |
+          git add app/data/top-tracks.json public/spotify
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898783+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Refresh Spotify top tracks"
+          git push
