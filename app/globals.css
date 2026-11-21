@@ -1629,6 +1629,13 @@ a.project__frame:hover {
   gap: 4px;
 }
 
+.webring {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+
 a.b88,
 a.b88:hover {
   line-height: 0;
