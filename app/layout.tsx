@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   keywords: ["developer", "portfolio", "web development", "rust", "typescript"],
 };
 
+// Runs before paint: skip the boot screen on return visits in this session, deep links and reduced motion.
+const bootCheck = `try{var d=document.documentElement;if(matchMedia("(prefers-reduced-motion: reduce)").matches||location.hash.length>1||sessionStorage.getItem("ransu-booted"))d.classList.add("booted");else sessionStorage.setItem("ransu-booted","1")}catch(e){document.documentElement.classList.add("booted")}`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,7 +30,10 @@ export default function RootLayout({
 }>) {
   return (
     // Font variables sit on <html> so the :root tokens in tokens.css can resolve them.
-    <html lang="en" className={`scroll-smooth ${pixelify.variable} ${vt323.variable}`}>
+    <html lang="en" className={`scroll-smooth ${pixelify.variable} ${vt323.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: bootCheck }} />
+      </head>
       <body>
         <a className="skip-link" href="#main-content">
           Skip to content

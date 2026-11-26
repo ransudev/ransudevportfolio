@@ -2,6 +2,8 @@ import Sidebar from "./components/sections/Sidebar";
 import Footer from "./components/sections/Footer";
 import Marquee from "./components/retro/Marquee";
 import CursorTrail from "./components/retro/CursorTrail";
+import ShootingStars from "./components/retro/ShootingStars";
+import BootScreen from "./components/retro/BootScreen";
 import { RetroImg, SpinStar } from "./components/retro/Badges";
 import { WalkingCat } from "./components/retro/Cats";
 import { newsItems } from "./data/badges";
@@ -15,7 +17,9 @@ import ContactPage from "./(pages)/contact/page";
 export default function RootPage() {
   return (
     <div className="site">
+      <BootScreen />
       <header className="banner">
+        <ShootingStars />
         <span className="banner__moon" aria-hidden="true">
           <RetroImg src="/retro/banner-moon.gif" width={52} height={52} />
         </span>
